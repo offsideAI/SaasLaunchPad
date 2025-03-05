@@ -24,12 +24,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
+import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
+import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
+import app.saaslaunchpad.saaslaunchpadapp.config.FeatureConfiguration
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import kotlinx.coroutines.launch
 
 
 class LandingScreen(): Screen{
@@ -41,7 +45,9 @@ class LandingScreen(): Screen{
         }
         val scope = rememberCoroutineScope()
         val auth = remember { Firebase.auth }
+        val djangoAuthService = remember { DjangoAuthService() }
         val firebaseUser: FirebaseUser? by remember { mutableStateOf(null) }
+        var djangoUser: DjangoUser? by remember { mutableStateOf(null) }
         var userEmail by remember { mutableStateOf("") }
         var userPassword by remember { mutableStateOf("") }
 
@@ -53,7 +59,8 @@ class LandingScreen(): Screen{
 
             contentAlignment = Alignment.Center
         ) {
-            if (firebaseUser == null) {
+            if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) || 
+                (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO && djangoUser == null)) {
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
@@ -79,7 +86,36 @@ class LandingScreen(): Screen{
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Button (
-                        onClick = {}
+                        onClick = {
+                            when (FeatureConfiguration.AuthBackend.ACTIVE) {
+                                FeatureConfiguration.AuthBackend.FIREBASE -> {
+                                    scope.launch {
+                                        try {
+                                            auth.createUserWithEmailAndPassword(
+                                                email = userEmail,
+                                                password = userPassword
+                                            )
+                                        } catch (e: Exception) {
+                                            auth.signInWithEmailAndPassword(
+                                                email = userEmail,
+                                                password = userPassword
+                                            )
+                                        }
+                                    }
+                                }
+                                FeatureConfiguration.AuthBackend.DJANGO -> {
+                                    scope.launch {
+                                        try {
+                                            djangoAuthService.createUser(userEmail, userPassword)
+                                                .onSuccess { user -> djangoUser = user }
+                                        } catch (e: Exception) {
+                                            djangoAuthService.signIn(userEmail, userPassword)
+                                                .onSuccess { user -> djangoUser = user }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     ) {
                         Text(text = "Sign in")
                     }
