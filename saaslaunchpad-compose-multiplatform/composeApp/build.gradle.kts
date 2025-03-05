@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.room)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.googleServices)
 }
 
 kotlin {
