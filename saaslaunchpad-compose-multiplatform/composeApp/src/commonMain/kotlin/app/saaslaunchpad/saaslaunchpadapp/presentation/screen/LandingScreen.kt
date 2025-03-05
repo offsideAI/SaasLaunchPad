@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +26,9 @@ import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainS
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FirebaseUser
+import dev.gitlive.firebase.auth.auth
 
 
 class LandingScreen(): Screen{
@@ -34,6 +38,11 @@ class LandingScreen(): Screen{
         var text by remember {
             mutableStateOf("")
         }
+        val scope = rememberCoroutineScope()
+        val auth = remember { Firebase.auth }
+        val firebaseUser: FirebaseUser? by remember { mutableStateOf(null) }
+        var userEmail by remember { mutableStateOf("") }
+        var userPassword by remember { mutableStateOf("") }
         Box(
             modifier = Modifier
                 .fillMaxSize()
