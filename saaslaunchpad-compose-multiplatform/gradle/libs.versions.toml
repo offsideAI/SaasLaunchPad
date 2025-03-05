@@ -29,6 +29,8 @@ animationAndroid = "1.7.8"
 animationCoreAndroid = "1.7.8"
 uiAndroidVersion = "1.7.8"
 timber = "5.0.1"
+googleservices = "4.4.1"
+
 
 sqldelight = "2.0.2"
 ktor = "3.0.1"
@@ -124,3 +126,4 @@ kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqldelight"}
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
+googlservices = { id = "com.google.gms.google-services", version.ref="googleservices" }
