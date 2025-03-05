@@ -168,3 +168,4 @@ google-services.json
 *.hprof
 
 GRADLE_SIGNING_REPORT.md
+google-services.json
