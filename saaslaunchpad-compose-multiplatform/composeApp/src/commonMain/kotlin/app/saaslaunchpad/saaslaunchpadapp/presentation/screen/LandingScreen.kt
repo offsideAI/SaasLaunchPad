@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,6 +44,32 @@ class LandingScreen(): Screen{
         val firebaseUser: FirebaseUser? by remember { mutableStateOf(null) }
         var userEmail by remember { mutableStateOf("") }
         var userPassword by remember { mutableStateOf("") }
+
+        if (firebaseUser == null) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TextField(
+                    value = userEmail,
+                    onValueChange = { userEmail = it },
+                    placeholder = { Text( text = "Email Address")}
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                TextField(
+                    value = userPassword,
+                    onValueChange = { userPassword = it },
+                    placeholder = { Text( text = "Password")}
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                Button (
+                    onClick = {}
+                ) {
+                    Text(text = "Sign in")
+                }
+            }
+        }
         Box(
             modifier = Modifier
                 .fillMaxSize()
