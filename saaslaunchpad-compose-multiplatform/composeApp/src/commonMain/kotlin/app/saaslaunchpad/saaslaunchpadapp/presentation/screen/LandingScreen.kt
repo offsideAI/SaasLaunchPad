@@ -48,7 +48,7 @@ class LandingScreen(): Screen{
                     .padding(horizontal = 50.dp)
             ) {
                 Text(
-                    text = "Paradigmatic",
+                    text = "SaaS Launch Pad",
                     color = Color.White,
                     style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -64,7 +64,7 @@ class LandingScreen(): Screen{
                 */
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "Privacy focused, agentic AI platform for logistics and property management",
+                    text = "Fullstack Saas Platform Starter Kit",
                     color = Color.White,
                     style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
