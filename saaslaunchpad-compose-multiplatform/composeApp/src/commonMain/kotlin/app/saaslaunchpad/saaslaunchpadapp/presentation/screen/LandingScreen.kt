@@ -45,31 +45,7 @@ class LandingScreen(): Screen{
         var userEmail by remember { mutableStateOf("") }
         var userPassword by remember { mutableStateOf("") }
 
-        if (firebaseUser == null) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                TextField(
-                    value = userEmail,
-                    onValueChange = { userEmail = it },
-                    placeholder = { Text( text = "Email Address")}
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                TextField(
-                    value = userPassword,
-                    onValueChange = { userPassword = it },
-                    placeholder = { Text( text = "Password")}
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                Button (
-                    onClick = {}
-                ) {
-                    Text(text = "Sign in")
-                }
-            }
-        }
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -77,46 +53,71 @@ class LandingScreen(): Screen{
 
             contentAlignment = Alignment.Center
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 50.dp)
-            ) {
-                Text(
-                    text = "SaaS Launch Pad",
-                    color = Color.White,
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-                /* TODO-FIXME-CLEANUP
-                TextField(
-                    value = text,
-                    onValueChange = {
-                        text = it
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                */
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = "Fullstack Saas Platform Starter Kit",
-                    color = Color.White,
-                    style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Button(
-                    onClick = {
-                        navigator?.push(BottomNavigationMainScreen())
-                    },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                        .background(surfaceContainerDark)
+            if (firebaseUser == null) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Get Started")
+                    Text(
+                        text = "SaaS Launch Pad",
+                        color = Color.White,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    TextField(
+                        value = userEmail,
+                        onValueChange = { userEmail = it },
+                        placeholder = { Text( text = "Email Address")}
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    TextField(
+                        value = userPassword,
+                        onValueChange = { userPassword = it },
+                        placeholder = { Text( text = "Password")}
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Button (
+                        onClick = {}
+                    ) {
+                        Text(text = "Sign in")
+                    }
                 }
-                Spacer(modifier = Modifier.height(8.dp))
+            } else {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 50.dp)
+                ) {
+                    Text(
+                        text = "SaaS Launch Pad",
+                        color = Color.White,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Fullstack Saas Platform Starter Kit",
+                        color = Color.White,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Button(
+                        onClick = {
+                            navigator?.push(BottomNavigationMainScreen())
+                        },
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                            .background(surfaceContainerDark)
+                    ) {
+                        Text(text = "Get Started")
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
             }
+
         }
     }
 
