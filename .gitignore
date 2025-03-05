@@ -167,3 +167,4 @@ google-services.json
 # Android Profiling
 *.hprof
 
+GRADLE_SIGNING_REPORT.md
