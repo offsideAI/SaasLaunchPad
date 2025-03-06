@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
@@ -82,7 +83,8 @@ class LandingScreen(): Screen{
                     TextField(
                         value = userPassword,
                         onValueChange = { userPassword = it },
-                        placeholder = { Text( text = "Password")}
+                        placeholder = { Text( text = "Password")},
+                        visualTransformation = PasswordVisualTransformation()
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Button (
