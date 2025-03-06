@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <!-- Main background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1432" />
+      <stop offset="100%" stop-color="#1E3A78" />
+    </linearGradient>
+    
+    <!-- Custom chevron gradients based on provided SVG -->
+    <linearGradient id="chevronGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4193d2" />
+      <stop offset="100%" stop-color="#3886c3" />
+    </linearGradient>
+    
+    <linearGradient id="chevronGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#48a4df" />
+      <stop offset="100%" stop-color="#3f95cc" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main rounded square background -->
+  <rect x="10" y="10" width="180" height="180" rx="45" ry="45" fill="url(#bgGradient)" />
+  
+  <!-- Centered custom chevron shape -->
+  <g transform="translate(100, 100) scale(0.26) translate(-256, -256)">
+    <!-- First path (darker blue) -->
+    <path d="M114.9,107.7l148.3,148.3-148.3,148.3c-24,24.5-24,63.8,0,88.3,24.4,24.9,64.3,25.3,89.2,.9l192.9-192.9
+         c24.6-24.6,24.6-64.6,0-89.2L204.1,18.5c-24.6-24.6-64.6-24.6-89.2,0-24.6,24.6-24.6,64.6,0,89.2Z" 
+         fill="url(#chevronGradient1)" />
+    
+    <!-- Second path (lighter blue) -->
+    <path d="M204.1,18.4C187.4,1.7,162.8-4.2,140.3,3c-15.5,32.4-24.5,67.5-26.5,103.4.4.4.8.8,1.2,1.3l148.3,148.3-65.9,65.9
+         c31.5,30.7,69.8,53.5,111.8,66.6l87.9-87.9c24.6-24.6,24.6-64.6,0-89.2L204.1,18.4Z"
+         fill="url(#chevronGradient2)" />
+  </g>
+</svg>
