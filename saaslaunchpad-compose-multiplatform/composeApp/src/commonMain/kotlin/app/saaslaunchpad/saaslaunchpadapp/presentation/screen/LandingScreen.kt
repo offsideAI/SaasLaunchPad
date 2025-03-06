@@ -95,11 +95,13 @@ class LandingScreen(): Screen{
                                                 email = userEmail,
                                                 password = userPassword
                                             )
+                                            navigator?.push(BottomNavigationMainScreen())
                                         } catch (e: Exception) {
                                             auth.signInWithEmailAndPassword(
                                                 email = userEmail,
                                                 password = userPassword
                                             )
+                                            navigator?.push(BottomNavigationMainScreen())
                                         }
                                     }
                                 }
