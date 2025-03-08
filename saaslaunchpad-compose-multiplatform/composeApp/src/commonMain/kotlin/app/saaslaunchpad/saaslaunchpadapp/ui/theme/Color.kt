@@ -275,3 +275,8 @@ val textColor
     @Composable
     get() = if (isSystemInDarkTheme()) Color(0xFFFFFFFF)
     else Color(0xFF000000)
+
+
+// New dark color theme
+val newPrimaryDark = Color(0xff1D2D5F)
+val newSecondaryDark = Color(0xff2059ff)

@@ -28,7 +28,9 @@ import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainS
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
 import app.saaslaunchpad.saaslaunchpadapp.config.FeatureConfiguration
+import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
+import app.saaslaunchpad.saaslaunchpadapp.util.createGradientEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
@@ -56,8 +58,12 @@ class LandingScreen(): Screen{
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(surfaceContainerDark),
-
+                .background(
+                    brush = createGradientEffect(
+                        colors = ThemeUtils.GradientColors,
+                        isVertical = true
+                    )
+                ),
             contentAlignment = Alignment.Center
         ) {
             if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) || 
