@@ -5,6 +5,8 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import app.saaslaunchpad.saaslaunchpadapp.presentation.screen.LandingScreen
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.darkScheme
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.lightScheme
@@ -31,7 +33,9 @@ fun App() {
 
 @Composable
 @Preview
-fun App() {
+fun App(
+    prefs: DataStore<Preferences>
+) {
     // TODO-FIXME-BRINGBACK initializeKoin()
     val colors = if (!isSystemInDarkTheme()) {
         // TODO-FIXME

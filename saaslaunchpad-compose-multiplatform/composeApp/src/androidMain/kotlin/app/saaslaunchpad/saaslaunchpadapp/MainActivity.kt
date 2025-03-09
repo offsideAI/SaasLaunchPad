@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
@@ -31,7 +33,11 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            App()
+            App(
+                prefs = rememberSaveable {
+                    createDataStore(applicationContext)
+                }
+            )
             val darkTheme = isSystemInDarkTheme()
             val view = LocalView.current
             if (!view.isInEditMode) {
@@ -48,8 +54,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/* TODO-FIXME
 @Preview
 @Composable
 fun AppAndroidPreview() {
     App()
 }
+*/
