@@ -1,7 +1,6 @@
 package app.saaslaunchpad.saaslaunchpadapp.presentation.screen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,9 +28,7 @@ import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainS
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
 import app.saaslaunchpad.saaslaunchpadapp.config.FeatureConfiguration
-import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
-import app.saaslaunchpad.saaslaunchpadapp.util.createGradientEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
@@ -40,7 +37,7 @@ import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
 
 
-class LandingScreen(): Screen{
+class RegisterScreen(): Screen{
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
@@ -59,12 +56,8 @@ class LandingScreen(): Screen{
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    brush = createGradientEffect(
-                        colors = ThemeUtils.GradientColors,
-                        isVertical = true
-                    )
-                ),
+                .background(surfaceContainerDark),
+
             contentAlignment = Alignment.Center
         ) {
             if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) || 
@@ -80,30 +73,56 @@ class LandingScreen(): Screen{
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Login",
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(8.dp)
-                            .clickable {
-                                navigator?.push(LoginScreen())
-                            }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    TextField(
+                        value = userEmail,
+                        onValueChange = { userEmail = it },
+                        placeholder = { Text( text = "Email Address")}
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Register",
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(8.dp)
-                            .clickable {
-                                navigator?.push(RegisterScreen())
-                            }
+                    Spacer(modifier = Modifier.height(12.dp))
+                    TextField(
+                        value = userPassword,
+                        onValueChange = { userPassword = it },
+                        placeholder = { Text( text = "Password")},
+                        visualTransformation = PasswordVisualTransformation()
                     )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Button (
+                        onClick = {
+                            when (FeatureConfiguration.AuthBackend.ACTIVE) {
+                                FeatureConfiguration.AuthBackend.FIREBASE -> {
+                                    scope.launch {
+                                        try {
+                                            auth.createUserWithEmailAndPassword(
+                                                email = userEmail,
+                                                password = userPassword
+                                            )
+                                            navigator?.push(BottomNavigationMainScreen())
+                                        } catch (e: Exception) {
+                                            auth.signInWithEmailAndPassword(
+                                                email = userEmail,
+                                                password = userPassword
+                                            )
+                                            navigator?.push(BottomNavigationMainScreen())
+                                        }
+                                    }
+                                }
+                                FeatureConfiguration.AuthBackend.DJANGO -> {
+                                    scope.launch {
+                                        try {
+                                            djangoAuthService.createUser(userEmail, userPassword)
+                                                .onSuccess { user -> djangoUser = user }
+                                        } catch (e: Exception) {
+                                            djangoAuthService.signIn(userEmail, userPassword)
+                                                .onSuccess { user -> djangoUser = user }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ) {
+                        Text(text = "Sign in")
+                    }
                 }
             } else {
                 Column(
