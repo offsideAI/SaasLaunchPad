@@ -53,7 +53,6 @@ kotlin {
             implementation(libs.timber)  // Add Timber for logging
             implementation(libs.koin.android)
             implementation(libs.androidx.core.splashscreen)
-            implementation(libs.datastore.preferences)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -91,6 +90,8 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.firebase.auth)
+            api(libs.datastore.preferences)
+            api(libs.datastore)
 
         }
 
