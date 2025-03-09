@@ -1,4 +1,4 @@
-package app.paradigmatic.paradigmaticapp
+package app.saaslaunchpad.saaslaunchpadapp
 
 
 import androidx.datastore.core.DataStore
@@ -10,7 +10,7 @@ import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
 @OptIn(ExperimentalForeignApi::class)
-fun createDataStore(function: () -> String): DataStore<Preferences> {
+fun createDataStore(): DataStore<Preferences> {
     return createDataStore {
         val directory = NSFileManager.defaultManager.URLForDirectory(
             directory = NSDocumentDirectory,

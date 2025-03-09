@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             App(
-                prefs = rememberSaveable {
+                prefs = remember {
                     createDataStore(applicationContext)
                 }
             )

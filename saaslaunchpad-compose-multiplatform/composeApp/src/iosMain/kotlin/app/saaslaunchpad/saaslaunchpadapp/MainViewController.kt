@@ -8,8 +8,6 @@ fun MainViewController() = ComposeUIViewController(
     configure = { initializeKoin() }
 ) { App(
     prefs = remember {
-        createDataStore {
-
-        }
+        createDataStore()
     }
 ) }
