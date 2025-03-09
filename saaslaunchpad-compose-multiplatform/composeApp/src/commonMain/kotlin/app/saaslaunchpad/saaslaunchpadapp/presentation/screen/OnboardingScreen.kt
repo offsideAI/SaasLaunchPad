@@ -55,6 +55,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import org.jetbrains.compose.resources.painterResource
+import saaslaunchpad.composeapp.generated.resources.Res
+import androidx.compose.material3.Icon
+import saaslaunchpad.composeapp.generated.resources.page_one
+import saaslaunchpad.composeapp.generated.resources.app_icon_splash_vector
 
 /**
  *  Data class for our onboarding pages
@@ -72,27 +77,27 @@ val onboardingPages = listOf(
     OnboardingPage(
         title = "Welcome to SaaS Launch Pad",
         description = "Your all-in-one platform for building and scaling SaaS applications effortlessly.",
-        imageRes = "welcome_illustration"
+        imageRes = "page_one"
     ),
     OnboardingPage(
         title = "Mobile & Web",
         description = "Build once, deploy everywhere with our cross-platform solution for web and mobile.",
-        imageRes = "mobile_web_illustration"
+        imageRes = "page_two"
     ),
     OnboardingPage(
         title = "Secure Backend & Auth",
         description = "Enterprise-grade security and authentication right out of the box.",
-        imageRes = "backend_auth_illustration"
+        imageRes = "page_three"
     ),
     OnboardingPage(
         title = "Payments & E-commerce",
         description = "Integrated payment processing and e-commerce capabilities to monetize your platform.",
-        imageRes = "payments_ecommerce_illustration"
+        imageRes = "page_four"
     ),
     OnboardingPage(
         title = "Ready to Launch?",
         description = "You're all set! Get started building your SaaS platform today.",
-        imageRes = "get_started_illustration"
+        imageRes = "page_five"
     )
 )
 
@@ -370,8 +375,7 @@ fun OnboardingPage(page: OnboardingPage) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // This would be replaced with your actual SVG rendering in the implementation
-        // For now, we'll indicate where the image would go
+        // Display the drawable as an icon instead of showing the text
         Box(
             modifier = Modifier
                 .size(280.dp)
@@ -380,9 +384,20 @@ fun OnboardingPage(page: OnboardingPage) {
                 .background(Color.White.copy(alpha = 0.1f)),
             contentAlignment = Alignment.Center
         ) {
-            // In real implementation, this would be your SVG renderer
-            // For now we'll just show the image name
-            Text(text = page.imageRes, color = Color.White)
+            when (page.imageRes) {
+                "page_one" -> Icon(
+                    painter = painterResource(Res.drawable.app_icon_splash_vector),
+                    contentDescription = page.title,
+                    modifier = Modifier.size(120.dp),
+                    tint = Color.White
+                )
+                else -> Icon(
+                    painter = painterResource(Res.drawable.app_icon_splash_vector),
+                    contentDescription = page.title,
+                    modifier = Modifier.size(120.dp),
+                    tint = Color.White
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -418,6 +433,3 @@ fun createGradientEffect(colors: List<Color>, isVertical: Boolean): Brush {
     }
 }
 */
-
-
-
