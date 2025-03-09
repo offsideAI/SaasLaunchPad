@@ -43,6 +43,9 @@ import org.koin.core.component.KoinComponent
 import kotlinx.coroutines.flow.map
 import androidx.compose.runtime.collectAsState
 import androidx.datastore.preferences.core.edit
+import org.jetbrains.compose.resources.painterResource
+import saaslaunchpad.composeapp.generated.resources.Res
+import saaslaunchpad.composeapp.generated.resources.app_icon_splash_vector
 
 
 class TabFiveScreen(
@@ -103,8 +106,9 @@ class TabFiveScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
+                        Spacer(modifier = Modifier.height(8.dp))
                         Icon(
-                            imageVector = Icons.Default.MoreVert,
+                            painter = painterResource(Res.drawable.app_icon_splash_vector),
                             contentDescription = "Profile",
                             modifier = Modifier.size(48.dp)
                         )
