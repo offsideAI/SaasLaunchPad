@@ -13,6 +13,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,6 +29,7 @@ import app.saaslaunchpad.saaslaunchpadapp.config.FeatureConfiguration
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
@@ -46,12 +49,35 @@ class TabFiveScreen: Screen, KoinComponent {
         val djangoAuthService = remember { DjangoAuthService() }
         var firebaseUser: FirebaseUser? by remember { mutableStateOf(null) }
         var djangoUser: DjangoUser? by remember { mutableStateOf(null) }
+
+        // Load Django user if that's your active backend
+        LaunchedEffect(Unit) {
+            if (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO) {
+                // djangoUser = djangoAuthService.getCurrentUser()
+            }
+        }
+
+        // Observe authentication state changes
+        /*
+        DisposableEffect(key1 = auth) {
+            val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+                firebaseUser = firebaseAuth.currentUser
+            }
+            auth.addAuthStateListener(authStateListener)
+
+            onDispose {
+                auth.removeAuthStateListener(authStateListener)
+            }
+        }
+        */
+
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser != null) ||
                 (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO && djangoUser != null)) {
+                println("We are logged in it seems")
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
@@ -77,6 +103,7 @@ class TabFiveScreen: Screen, KoinComponent {
 
                 }
             } else {
+                println("We are not logged in it seems")
 
             }
         }

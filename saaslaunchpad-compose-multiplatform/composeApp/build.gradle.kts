@@ -53,6 +53,7 @@ kotlin {
             implementation(libs.timber)  // Add Timber for logging
             implementation(libs.koin.android)
             implementation(libs.androidx.core.splashscreen)
+            implementation(libs.datastore.preferences)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
