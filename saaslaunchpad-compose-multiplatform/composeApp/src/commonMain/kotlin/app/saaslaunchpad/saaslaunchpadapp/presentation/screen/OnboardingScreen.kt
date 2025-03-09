@@ -211,7 +211,7 @@ class OnboardingScreen(
                                 .align(Alignment.CenterHorizontally)
                                 .padding(8.dp)
                                 .clickable {
-                                    navigator?.push(RegistrationScreen())
+                                    navigator?.push(RegistrationScreen(prefs = prefs))
                                 }
                         )
                     }
@@ -238,7 +238,7 @@ class OnboardingScreen(
                         Spacer(modifier = Modifier.height(4.dp))
                         Button(
                             onClick = {
-                                navigator?.push(BottomNavigationMainScreen())
+                                navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                             },
                             modifier = Modifier
                                 .align(Alignment.CenterHorizontally)

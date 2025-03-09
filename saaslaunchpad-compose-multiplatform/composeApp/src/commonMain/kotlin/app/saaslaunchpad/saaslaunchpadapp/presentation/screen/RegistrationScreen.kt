@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
@@ -40,7 +42,9 @@ import dev.gitlive.firebase.auth.auth
 import kotlinx.coroutines.launch
 
 
-class RegistrationScreen(): Screen{
+class RegistrationScreen(
+    private val prefs: DataStore<Preferences>
+): Screen{
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
@@ -104,13 +108,13 @@ class RegistrationScreen(): Screen{
                                                 email = userEmail,
                                                 password = userPassword
                                             )
-                                            navigator?.push(BottomNavigationMainScreen())
+                                            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                                         } catch (e: Exception) {
                                             auth.signInWithEmailAndPassword(
                                                 email = userEmail,
                                                 password = userPassword
                                             )
-                                            navigator?.push(BottomNavigationMainScreen())
+                                            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                                         }
                                     }
                                 }
@@ -166,7 +170,7 @@ class RegistrationScreen(): Screen{
                     Spacer(modifier = Modifier.height(4.dp))
                     Button(
                         onClick = {
-                            navigator?.push(BottomNavigationMainScreen())
+                            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                         },
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                             .background(surfaceContainerDark)

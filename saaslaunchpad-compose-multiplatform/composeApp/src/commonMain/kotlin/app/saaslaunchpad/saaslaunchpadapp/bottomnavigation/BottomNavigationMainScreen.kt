@@ -16,6 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import app.saaslaunchpad.saaslaunchpadapp.bottomnavigation.TabOneScreen
 import app.saaslaunchpad.saaslaunchpadapp.bottomnavigation.TabThreeScreen
 import app.saaslaunchpad.saaslaunchpadapp.bottomnavigation.TabTwoScreen
@@ -26,7 +28,9 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 
-class BottomNavigationMainScreen : Screen {
+class BottomNavigationMainScreen(
+    private val prefs: DataStore<Preferences>
+) : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
@@ -94,7 +98,7 @@ class BottomNavigationMainScreen : Screen {
                     3 -> Navigator(TabFourScreen()) { navigator ->
                        SlideTransition(navigator)
                     }
-                    4 -> TabFiveScreen().Content()
+                    4 -> TabFiveScreen(prefs).Content()
                 }
             }
         }

@@ -118,7 +118,7 @@ class LoginScreen(
                                             )
                                             toastMessage = "Successfully registered and logged in!"
                                             showToast = true
-                                            navigator?.push(BottomNavigationMainScreen())
+                                            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                                         } catch (e: Exception) {
                                             try {
                                                 auth.signInWithEmailAndPassword(
@@ -133,7 +133,7 @@ class LoginScreen(
                                                         dataStore[isLoggedInKey] = true
                                                     }
                                                 }
-                                                navigator?.push(BottomNavigationMainScreen())
+                                                navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                                             } catch (e: Exception) {
                                                 toastMessage = "Login failed: ${e.message}"
                                                 showToast = true
@@ -149,7 +149,7 @@ class LoginScreen(
                                                     djangoUser = user 
                                                     toastMessage = "Successfully registered and logged in!"
                                                     showToast = true
-                                                    navigator?.push(BottomNavigationMainScreen())
+                                                    navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                                                 }
                                                 .onFailure { error ->
                                                     // Try to sign in instead
@@ -158,7 +158,7 @@ class LoginScreen(
                                                             djangoUser = user 
                                                             toastMessage = "Successfully logged in!"
                                                             showToast = true
-                                                            navigator?.push(BottomNavigationMainScreen())
+                                                            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                                                         }
                                                         .onFailure { loginError ->
                                                             toastMessage = "Login failed: ${loginError.message}"
@@ -212,7 +212,7 @@ class LoginScreen(
                     Spacer(modifier = Modifier.height(4.dp))
                     Button(
                         onClick = {
-                            navigator?.push(BottomNavigationMainScreen())
+                            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
                         },
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                             .background(surfaceContainerDark)
