@@ -5,52 +5,40 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import app.saaslaunchpad.saaslaunchpadapp.presentation.screen.LandingScreen
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.darkScheme
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.lightScheme
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
+import kotlinx.coroutines.flow.map
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-/* TODO-FIXME-CLEANUP
-@Composable
-@Preview
-fun App() {
-    val colors = if (!isSystemInDarkTheme()) {
-        lightScheme
-    } else {
-        darkScheme
-    }
-    MaterialTheme(colorScheme = colors) {
-        Surface {
-            MainScreen()
-        }
-    }
-}
-*/
 
 @Composable
 @Preview
 fun App(
     prefs: DataStore<Preferences>
 ) {
-    // TODO-FIXME-BRINGBACK initializeKoin()
     val colors = if (!isSystemInDarkTheme()) {
-        // TODO-FIXME
-        // TODO-FIXME-Commenting out to force darkScheme
         lightScheme
     } else {
         darkScheme
     }
+    // Check if user is logged in
+    val isLoggedIn by prefs
+        .data
+        .map {
+            val isLoggedInKey = booleanPreferencesKey("isLoggedIn")
+            it[isLoggedInKey] ?: false
+        }
+        .collectAsState(false)
+
     MaterialTheme(colorScheme = colors) {
         Surface {
-            /* TODO-FIXME-CLEANUP
-            Navigator(BottomNavigationMainScreen()) { navigator ->
-                SlideTransition(navigator)
-            }
-            */
             Navigator(LandingScreen(prefs)) { navigator ->
                 SlideTransition(navigator)
             }

@@ -121,7 +121,7 @@ class TabFiveScreen(
                                     auth.signOut()
                                     prefs.edit { dataStore ->
                                         val isLoggedInKey = booleanPreferencesKey("isLoggedIn")
-                                        dataStore[isLoggedInKey] = true
+                                        dataStore[isLoggedInKey] = false
                                     }
                                     navigator?.pop()
                                 }
