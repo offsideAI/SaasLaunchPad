@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
 import app.saaslaunchpad.saaslaunchpadapp.presentation.screen.LandingScreen
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.darkScheme
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.lightScheme
@@ -39,7 +40,20 @@ fun App(
 
     MaterialTheme(colorScheme = colors) {
         Surface {
-            Navigator(LandingScreen(prefs)) { navigator ->
+            Navigator(
+                screen = LandingScreen(prefs),
+                onBackPressed = { currentScreen ->
+                    // If the user is logged in and the current screen is BottomNavigationMainScreen,
+                    // intercept the back button press
+                    if (isLoggedIn && currentScreen is BottomNavigationMainScreen) {
+                        println("You are currently logged in")
+                        true // Consume the back press event
+                    } else {
+                        // Default behavior - allow popping the screen
+                        false
+                    }
+                }
+            ) { navigator ->
                 SlideTransition(navigator)
             }
         }
