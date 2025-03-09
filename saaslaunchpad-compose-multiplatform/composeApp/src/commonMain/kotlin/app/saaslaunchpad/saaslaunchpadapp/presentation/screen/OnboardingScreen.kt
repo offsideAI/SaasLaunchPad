@@ -53,6 +53,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 
 /**
  *  Data class for our onboarding pages
@@ -95,7 +97,9 @@ val onboardingPages = listOf(
 )
 
 
-class OnboardingScreen(): Screen{
+class OnboardingScreen(
+    private val prefs: DataStore<Preferences>
+): Screen{
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
     override fun Content() {
@@ -195,7 +199,7 @@ class OnboardingScreen(): Screen{
                                 .align(Alignment.CenterHorizontally)
                                 .padding(8.dp)
                                 .clickable {
-                                    navigator?.push(LoginScreen())
+                                    navigator?.push(LoginScreen(prefs = prefs))
                                 }
                         )
                         Spacer(modifier = Modifier.height(8.dp))

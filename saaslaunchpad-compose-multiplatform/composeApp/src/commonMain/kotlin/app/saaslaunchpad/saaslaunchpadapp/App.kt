@@ -51,7 +51,7 @@ fun App(
                 SlideTransition(navigator)
             }
             */
-            Navigator(LandingScreen()) { navigator ->
+            Navigator(LandingScreen(prefs)) { navigator ->
                 SlideTransition(navigator)
             }
         }

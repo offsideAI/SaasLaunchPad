@@ -11,10 +11,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Popup
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
@@ -37,10 +44,13 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import androidx.datastore.preferences.core.edit
 
-
-class LoginScreen(): Screen{
+class LoginScreen(
+    private val prefs: DataStore<Preferences>
+): Screen{
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
@@ -54,6 +64,8 @@ class LoginScreen(): Screen{
         var djangoUser: DjangoUser? by remember { mutableStateOf(null) }
         var userEmail by remember { mutableStateOf("") }
         var userPassword by remember { mutableStateOf("") }
+        var showToast by remember { mutableStateOf(false) }
+        var toastMessage by remember { mutableStateOf("") }
 
 
         Box(
@@ -104,13 +116,28 @@ class LoginScreen(): Screen{
                                                 email = userEmail,
                                                 password = userPassword
                                             )
+                                            toastMessage = "Successfully registered and logged in!"
+                                            showToast = true
                                             navigator?.push(BottomNavigationMainScreen())
                                         } catch (e: Exception) {
-                                            auth.signInWithEmailAndPassword(
-                                                email = userEmail,
-                                                password = userPassword
-                                            )
-                                            navigator?.push(BottomNavigationMainScreen())
+                                            try {
+                                                auth.signInWithEmailAndPassword(
+                                                    email = userEmail,
+                                                    password = userPassword
+                                                )
+                                                toastMessage = "Successfully logged in!"
+                                                showToast = true
+                                                scope.launch {
+                                                    prefs.edit { dataStore ->
+                                                        val isLoggedInKey = booleanPreferencesKey("isLoggedIn")
+                                                        dataStore[isLoggedInKey] = true
+                                                    }
+                                                }
+                                                navigator?.push(BottomNavigationMainScreen())
+                                            } catch (e: Exception) {
+                                                toastMessage = "Login failed: ${e.message}"
+                                                showToast = true
+                                            }
                                         }
                                     }
                                 }
@@ -118,10 +145,29 @@ class LoginScreen(): Screen{
                                     scope.launch {
                                         try {
                                             djangoAuthService.createUser(userEmail, userPassword)
-                                                .onSuccess { user -> djangoUser = user }
+                                                .onSuccess { user -> 
+                                                    djangoUser = user 
+                                                    toastMessage = "Successfully registered and logged in!"
+                                                    showToast = true
+                                                    navigator?.push(BottomNavigationMainScreen())
+                                                }
+                                                .onFailure { error ->
+                                                    // Try to sign in instead
+                                                    djangoAuthService.signIn(userEmail, userPassword)
+                                                        .onSuccess { user -> 
+                                                            djangoUser = user 
+                                                            toastMessage = "Successfully logged in!"
+                                                            showToast = true
+                                                            navigator?.push(BottomNavigationMainScreen())
+                                                        }
+                                                        .onFailure { loginError ->
+                                                            toastMessage = "Login failed: ${loginError.message}"
+                                                            showToast = true
+                                                        }
+                                                }
                                         } catch (e: Exception) {
-                                            djangoAuthService.signIn(userEmail, userPassword)
-                                                .onSuccess { user -> djangoUser = user }
+                                            toastMessage = "Error: ${e.message}"
+                                            showToast = true
                                         }
                                     }
                                 }
@@ -176,8 +222,16 @@ class LoginScreen(): Screen{
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
-
+            
+            if (showToast) {
+                ComposeToast(
+                    message = toastMessage,
+                    onDismiss = { showToast = false }
+                )
+            }
         }
     }
-
 }
+
+
+

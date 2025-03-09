@@ -23,6 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
@@ -36,7 +38,9 @@ import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
 
-class LandingScreen(): Screen{
+class LandingScreen(
+    private val prefs: DataStore<Preferences>
+): Screen{
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
@@ -85,7 +89,7 @@ class LandingScreen(): Screen{
                             .align(Alignment.CenterHorizontally)
                             .padding(8.dp)
                             .clickable {
-                                navigator?.push(LoginScreen())
+                                navigator?.push(LoginScreen(prefs))
                             }
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -109,7 +113,7 @@ class LandingScreen(): Screen{
                             .align(Alignment.CenterHorizontally)
                             .padding(8.dp)
                             .clickable {
-                                navigator?.push(OnboardingScreen())
+                                navigator?.push(OnboardingScreen(prefs))
                             }
                     )
                 }
