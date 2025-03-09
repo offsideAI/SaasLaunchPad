@@ -1,6 +1,7 @@
 package app.saaslaunchpad.saaslaunchpadapp.presentation.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,7 +29,9 @@ import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainS
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
 import app.saaslaunchpad.saaslaunchpadapp.config.FeatureConfiguration
+import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
+import app.saaslaunchpad.saaslaunchpadapp.util.createGradientEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
@@ -56,8 +59,12 @@ class LoginScreen(): Screen{
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(surfaceContainerDark),
-
+                .background(
+                    brush = createGradientEffect(
+                        colors = ThemeUtils.GradientColors,
+                        isVertical = true
+                    )
+                ),
             contentAlignment = Alignment.Center
         ) {
             if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) || 
@@ -68,7 +75,7 @@ class LoginScreen(): Screen{
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "SaaS Launch Pad",
+                        text = "Login",
                         color = Color.White,
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -123,6 +130,18 @@ class LoginScreen(): Screen{
                     ) {
                         Text(text = "Sign in")
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Back",
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(8.dp)
+                            .clickable {
+                                navigator?.pop()
+                            }
+                    )
                 }
             } else {
                 Column(

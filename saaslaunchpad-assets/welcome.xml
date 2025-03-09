@@ -1,0 +1,346 @@
+<!-- welcome_illustration.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="400dp"
+    android:viewportWidth="400"
+    android:viewportHeight="400">
+    <!-- Rocket -->
+    <path
+        android:fillColor="#6379E9"
+        android:pathData="M200,80 C230,50 270,50 290,80 C310,110 310,150 290,180 L240,230 C240,230 220,230 200,210 C180,190 180,170 180,170 L130,120 C110,100 110,60 130,30 C150,0 190,0 220,30 Z" />
+    <path
+        android:fillColor="#ffffff"
+        android:fillAlpha="0.6"
+        android:pathData="M250,110 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <!-- Launch trail -->
+    <path
+        android:strokeColor="#FFB74D"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M160,240 C140,260 130,270 120,290 C110,310 100,330 100,350" />
+    <path
+        android:strokeColor="#FF9800"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:pathData="M180,220 C160,240 150,250 140,270 C130,290 120,310 120,330" />
+    <path
+        android:strokeColor="#EF6C00"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M200,200 C180,220 170,230 160,250 C150,270 140,290 140,310" />
+    <!-- Planets -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M70,70 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+    <path
+        android:fillColor="#48A9A6"
+        android:pathData="M330,150 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <path
+        android:fillColor="#9162E4"
+        android:pathData="M280,320 m-25,0 a25,25 0 1,0 50,0 a25,25 0 1,0 -50,0" />
+</vector>
+
+<!-- mobile_web_illustration.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="400dp"
+    android:viewportWidth="400"
+    android:viewportHeight="400">
+    <!-- Laptop -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M100,150 L300,150 L300,270 L100,270 Z"
+        android:cornerRadius="8dp" />
+    <path
+        android:fillColor="#2C3E50"
+        android:pathData="M110,160 L290,160 L290,260 L110,260 Z" />
+    <path
+        android:fillColor="#3498DB"
+        android:pathData="M120,170 L280,170 L280,250 L120,250 Z" />
+    <!-- Code symbols on screen -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M130,190 L145,190 M160,190 L175,190 M190,190 L205,190" />
+    <!-- Laptop base -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M80,270 L320,270 L310,290 L90,290 Z" />
+    
+    <!-- Mobile phone -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M230,100 L290,100 L290,210 L230,210 Z"
+        android:cornerRadius="5dp" />
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M235,110 L285,110 L285,190 L235,190 Z" />
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M260,200 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0" />
+
+    <!-- Web browser window floating -->
+    <path
+        android:fillColor="#F5F5F5"
+        android:pathData="M100,70 L220,70 L220,150 L100,150 Z"
+        android:cornerRadius="3dp" />
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M100,70 L220,70 L220,85 L100,85 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M107,77 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M117,77 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M127,77 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M110,95 L210,95 L210,100 L110,100 Z" />
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M110,105 L190,105 L190,110 L110,110 Z" />
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M110,115 L200,115 L200,120 L110,120 Z" />
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M110,125 L180,125 L180,130 L110,130 Z" />
+</vector>
+
+<!-- backend_auth_illustration.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="400dp"
+    android:viewportWidth="400"
+    android:viewportHeight="400">
+    <!-- Server stack -->
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M120,100 L280,100 L280,130 L120,130 Z"
+        android:cornerRadius="3dp" />
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M125,105 L275,105 L275,125 L125,125 Z" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M135,115 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M145,110 L165,110 L165,120 L145,120 Z" />
+    
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M130,140 L290,140 L290,170 L130,170 Z"
+        android:cornerRadius="3dp" />
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M135,145 L285,145 L285,165 L135,165 Z" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M145,155 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M155,150 L175,150 L175,160 L155,160 Z" />
+    
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M110,180 L270,180 L270,210 L110,210 Z"
+        android:cornerRadius="3dp" />
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M115,185 L265,185 L265,205 L115,205 Z" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M125,195 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M135,190 L155,190 L155,200 L135,200 Z" />
+
+    <!-- Lock/Security icon -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M240,130 L300,130 L300,180 L240,180 Z"
+        android:cornerRadius="5dp" />
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M270,150 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0" />
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M258,150 L282,150 L282,170 L258,170 Z"
+        android:cornerRadius="2dp" />
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M265,155 L275,155 L275,165 L265,165 Z" />
+    
+    <!-- Connection lines -->
+    <path
+        android:strokeColor="#64B5F6"
+        android:strokeWidth="3"
+        android:pathData="M130,220 C130,250 170,260 210,230" />
+    <path
+        android:strokeColor="#64B5F6"
+        android:strokeWidth="3"
+        android:pathData="M150,220 C150,240 180,250 220,240" />
+    <path
+        android:strokeColor="#64B5F6"
+        android:strokeWidth="3"
+        android:pathData="M170,220 C170,235 190,245 230,235" />
+    
+    <!-- Database -->
+    <path
+        android:fillColor="#7E57C2"
+        android:pathData="M200,220 a30,10 0 1,0 60,0 a30,10 0 1,0 -60,0" />
+    <path
+        android:fillColor="#7E57C2"
+        android:pathData="M200,230 L200,270 C200,276 213,281 230,281 C247,281 260,276 260,270 L260,230" />
+    <path
+        android:fillColor="#9575CD"
+        android:pathData="M200,270 a30,10 0 1,0 60,0 a30,10 0 1,0 -60,0" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1"
+        android:strokeAlpha="0.5"
+        android:pathData="M220,240 L220,260" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1"
+        android:strokeAlpha="0.5"
+        android:pathData="M230,240 L230,260" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1"
+        android:strokeAlpha="0.5"
+        android:pathData="M240,240 L240,260" />
+</vector>
+
+<!-- payments_ecommerce_illustration.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="400dp"
+    android:viewportWidth="400"
+    android:viewportHeight="400">
+    <!-- Credit card -->
+    <path
+        android:fillColor="#673AB7"
+        android:pathData="M100,120 L250,120 L250,210 L100,210 Z"
+        android:cornerRadius="10dp" />
+    <path
+        android:fillColor="#D1C4E9"
+        android:pathData="M115,145 L235,145 L235,165 L115,165 Z" />
+    <path
+        android:fillColor="#9575CD"
+        android:pathData="M115,175 L175,175 L175,195 L115,195 Z" />
+    
+    <!-- Shopping cart -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M250,250 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M310,250 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <path
+        android:strokeColor="#424242"
+        android:strokeWidth="5"
+        android:pathData="M210,160 L230,250 L330,250 L300,160 Z" />
+    
+    <!-- Shopping items -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M240,170 L270,170 L270,200 L240,200 Z" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M255,180 L285,180 L285,210 L255,210 Z" />
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M270,190 L300,190 L300,220 L270,220 Z" />
+    
+    <!-- Dollar signs -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M150,100 L155,100 L155,105 L150,105 Z" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M220,120 L225,120 L225,125 L220,125 Z" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M290,100 L295,100 L295,105 L290,105 Z" />
+    
+    <!-- Receipt -->
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M160,220 L230,220 L230,320 L160,320 Z" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M170,230 L220,230 L220,235 L170,235 Z" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M170,240 L210,240 L210,245 L170,245 Z" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M170,250 L220,250 L220,255 L170,255 Z" />
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M170,260 L200,260 L200,265 L170,265 Z" />
+    <path
+        android:strokeColor="#BDBDBD"
+        android:strokeWidth="1"
+        android:strokeDashArray="2,2"
+        android:pathData="M160,280 L230,280" />
+    <path
+        android:fillColor="#424242"
+        android:pathData="M170,290 L220,290 L220,298 L170,298 Z" />
+</vector>
+
+<!-- get_started_illustration.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="400dp"
+    android:viewportWidth="400"
+    android:viewportHeight="400">
+    <!-- Circular progress/completion icon -->
+    <path
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="10"
+        android:pathData="M200,150 m-100,0 a100,100 0 1,0 200,0 a100,100 0 1,0 -200,0" />
+    <path
+        android:strokeColor="#6200EA"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"
+        android:pathData="M200,50 A100,100 0 1,1 125,75" />
+    
+    <!-- Checkmark -->
+    <path
+        android:strokeColor="#6200EA"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M160,150 L190,180 L240,130" />
+    
+    <!-- Decorative elements -->
+    <path
+        android:fillColor="#FF4081"
+        android:fillAlpha="0.7"
+        android:pathData="M120,80 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <path
+        android:fillColor="#00BCD4"
+        android:fillAlpha="0.7"
+        android:pathData="M300,100 m-12,0 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0" />
+    <path
+        android:fillColor="#FFAB00"
+        android:fillAlpha="0.7"
+        android:pathData="M270,230 m-18,0 a18,18 0 1,0 36,0 a18,18 0 1,0 -36,0" />
+    <path
+        android:fillColor="#76FF03"
+        android:fillAlpha="0.7"
+        android:pathData="M130,210 m-10,0 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0" />
+    
+    <!-- Start flag -->
+    <path
+        android:fillColor="#455A64"
+        android:pathData="M320,180 L325,180 L325,250 L320,250 Z" />
+    <path
+        android:fillColor="#FF5252"
+        android:pathData="M325,180 L355,190 L325,200 Z" />
+</vector>

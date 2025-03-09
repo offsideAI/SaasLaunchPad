@@ -15,6 +15,7 @@ import saaslaunchpad.composeapp.generated.resources.Res
 import saaslaunchpad.composeapp.generated.resources.bebas_nue_regular
 
 
+
 fun createHorizontalGradientEffect(
     colors: List<Color>,
     isVertical: Boolean = true

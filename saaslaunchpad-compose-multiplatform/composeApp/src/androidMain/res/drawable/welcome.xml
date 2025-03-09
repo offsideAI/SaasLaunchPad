@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="400dp"
+    android:viewportWidth="400"
+    android:viewportHeight="400">
+    <!-- Rocket -->
+    <path
+        android:fillColor="#6379E9"
+        android:pathData="M200,80 C230,50 270,50 290,80 C310,110 310,150 290,180 L240,230 C240,230 220,230 200,210 C180,190 180,170 180,170 L130,120 C110,100 110,60 130,30 C150,0 190,0 220,30 Z" />
+    <path
+        android:fillColor="#ffffff"
+        android:fillAlpha="0.6"
+        android:pathData="M250,110 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <!-- Launch trail -->
+    <path
+        android:strokeColor="#FFB74D"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M160,240 C140,260 130,270 120,290 C110,310 100,330 100,350" />
+    <path
+        android:strokeColor="#FF9800"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:pathData="M180,220 C160,240 150,250 140,270 C130,290 120,310 120,330" />
+    <path
+        android:strokeColor="#EF6C00"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M200,200 C180,220 170,230 160,250 C150,270 140,290 140,310" />
+    <!-- Planets -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M70,70 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" />
+    <path
+        android:fillColor="#48A9A6"
+        android:pathData="M330,150 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+    <path
+        android:fillColor="#9162E4"
+        android:pathData="M280,320 m-25,0 a25,25 0 1,0 50,0 a25,25 0 1,0 -50,0" />
+</vector>
