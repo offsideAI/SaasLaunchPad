@@ -84,7 +84,6 @@ class TabFiveScreen(
             } else {
                 firebaseUser = auth.currentUser
             }
-
         }
         Box(
             modifier = Modifier

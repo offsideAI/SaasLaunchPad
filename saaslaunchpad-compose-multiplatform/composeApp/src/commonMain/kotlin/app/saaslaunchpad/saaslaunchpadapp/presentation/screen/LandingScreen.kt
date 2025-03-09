@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.material3.Icon
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -37,6 +38,15 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import saaslaunchpad.composeapp.generated.resources.Res
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.input.key.Key.Companion.R
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import kotlinx.coroutines.flow.map
+import org.jetbrains.compose.resources.painterResource
+import saaslaunchpad.composeapp.generated.resources.app_icon_splash_vector
 
 class LandingScreen(
     private val prefs: DataStore<Preferences>
@@ -50,107 +60,141 @@ class LandingScreen(
         val scope = rememberCoroutineScope()
         val auth = remember { Firebase.auth }
         val djangoAuthService = remember { DjangoAuthService() }
-        val firebaseUser: FirebaseUser? by remember { mutableStateOf(null) }
+        var firebaseUser: FirebaseUser? by remember { mutableStateOf(null) }
         var djangoUser: DjangoUser? by remember { mutableStateOf(null) }
         var userEmail by remember { mutableStateOf("") }
         var userPassword by remember { mutableStateOf("") }
 
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = createGradientEffect(
-                        colors = ThemeUtils.GradientColors,
-                        isVertical = true
-                    )
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) || 
-                (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO && djangoUser == null)) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "SaaS Launch Pad",
-                        color = Color.White,
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Login",
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(8.dp)
-                            .clickable {
-                                navigator?.push(LoginScreen(prefs))
-                            }
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Register",
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(8.dp)
-                            .clickable {
-                                navigator?.push(RegistrationScreen(prefs = prefs))
-                            }
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Onboarding",
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(8.dp)
-                            .clickable {
-                                navigator?.push(OnboardingScreen(prefs))
-                            }
-                    )
-                }
-            } else {
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 50.dp)
-                ) {
-                    Text(
-                        text = "SaaS Launch Pad",
-                        color = Color.White,
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = "Fullstack Saas Platform Starter Kit",
-                        color = Color.White,
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Button(
-                        onClick = {
-                            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
-                        },
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                            .background(surfaceContainerDark)
-                    ) {
-                        Text(text = "Get Started")
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
+        val isLoggedIn by prefs
+            .data
+            .map {
+                val isLoggedInKey = booleanPreferencesKey("isLoggedIn")
+                it[isLoggedInKey] ?: false
             }
+            .collectAsState(false)
 
+        val isLoggedInDjango by prefs
+            .data
+            .map {
+                val isLoggedInKeyDjango = booleanPreferencesKey("isLoggedInDjango")
+                it[isLoggedInKeyDjango] ?: false
+            }
+            .collectAsState(false)
+
+        LaunchedEffect(Unit) {
+            if (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO) {
+                // djangoUser = djangoAuthService.getCurrentUser()
+            } else {
+                firebaseUser = auth.currentUser
+            }
+        }
+        if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser!= null && isLoggedIn) ||
+            (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO && isLoggedInDjango)) {
+            println("We are logged in it seems - navigate to BottomNavigationMainScreen")
+            navigator?.push(BottomNavigationMainScreen(prefs = prefs))
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = createGradientEffect(
+                            colors = ThemeUtils.GradientColors,
+                            isVertical = true
+                        )
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) ||
+                    (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO && djangoUser == null)) {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "SaaS Launch Pad",
+                            color = Color.White,
+                            style = MaterialTheme.typography.headlineSmall,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Icon(
+                            painter = painterResource(Res.drawable.app_icon_splash_vector),
+                            contentDescription = "Profile",
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Login",
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(8.dp)
+                                .clickable {
+                                    navigator?.push(LoginScreen(prefs))
+                                }
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Register",
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(8.dp)
+                                .clickable {
+                                    navigator?.push(RegistrationScreen(prefs = prefs))
+                                }
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Onboarding",
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(8.dp)
+                                .clickable {
+                                    navigator?.push(OnboardingScreen(prefs))
+                                }
+                        )
+                    }
+                } else {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 50.dp)
+                    ) {
+                        Text(
+                            text = "SaaS Launch Pad",
+                            color = Color.White,
+                            style = MaterialTheme.typography.headlineSmall,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Fullstack Saas Platform Starter Kit",
+                            color = Color.White,
+                            style = MaterialTheme.typography.headlineSmall,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Button(
+                            onClick = {
+                                navigator?.push(BottomNavigationMainScreen(prefs = prefs))
+                            },
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                                .background(surfaceContainerDark)
+                        ) {
+                            Text(text = "Get Started")
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                }
+
+            }
         }
     }
 

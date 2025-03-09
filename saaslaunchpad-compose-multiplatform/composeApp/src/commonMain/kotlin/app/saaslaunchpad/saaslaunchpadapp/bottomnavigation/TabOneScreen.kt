@@ -1,5 +1,6 @@
 package app.saaslaunchpad.saaslaunchpadapp.bottomnavigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,7 +28,9 @@ import androidx.compose.ui.unit.dp
 import app.saaslaunchpad.saaslaunchpadapp.domain.CurrencyApiService
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Post
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.PostViewModel
+import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.primaryColor
+import app.saaslaunchpad.saaslaunchpadapp.util.createGradientEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import org.koin.core.component.KoinComponent
@@ -47,9 +50,16 @@ class TabOneScreen : Screen, KoinComponent {
             currencyApiService.getLatestExchangeRates()
         }
 
-        // Main layout
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = createGradientEffect(
+                        colors = ThemeUtils.GradientColors,
+                        isVertical = true
+                    )
+                ),
+            contentAlignment = Alignment.Center
         ) {
             if (allPosts.isSuccess()) {
                 val data = remember { allPosts.getSuccessData() }

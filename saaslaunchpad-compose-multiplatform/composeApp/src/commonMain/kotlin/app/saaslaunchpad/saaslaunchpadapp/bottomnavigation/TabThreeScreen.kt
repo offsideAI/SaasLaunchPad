@@ -1,5 +1,6 @@
 package app.saaslaunchpad.saaslaunchpadapp.bottomnavigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,8 @@ import app.saaslaunchpad.saaslaunchpadapp.presentation.component.HomeBody
 import app.saaslaunchpad.saaslaunchpadapp.presentation.component.HomeHeader
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.HomeUiEvent
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.HomeViewModel
+import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
+import app.saaslaunchpad.saaslaunchpadapp.util.createGradientEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import org.koin.core.component.KoinComponent
@@ -81,7 +84,14 @@ class TabThreeScreen: Screen, KoinComponent {
             currencyApiService.getLatestExchangeRates()
         }
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = createGradientEffect(
+                        colors = ThemeUtils.GradientColors,
+                        isVertical = true
+                    )
+                ),
             contentAlignment = Alignment.Center
         ) {
             Column(

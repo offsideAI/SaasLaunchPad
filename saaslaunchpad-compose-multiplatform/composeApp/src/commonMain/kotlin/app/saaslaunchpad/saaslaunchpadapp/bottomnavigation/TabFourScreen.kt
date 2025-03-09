@@ -37,7 +37,9 @@ import app.saaslaunchpad.saaslaunchpadapp.presentation.meme.MemeView
 import app.saaslaunchpad.saaslaunchpadapp.presentation.screen.ErrorView
 import app.saaslaunchpad.saaslaunchpadapp.presentation.screen.LoadingView
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.MemeViewModel
+import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
+import app.saaslaunchpad.saaslaunchpadapp.util.createGradientEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import kotlinx.coroutines.delay
@@ -76,7 +78,14 @@ class TabFourScreen(
             }
         ) {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = createGradientEffect(
+                            colors = ThemeUtils.GradientColors,
+                            isVertical = true
+                        )
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Column(
@@ -93,7 +102,6 @@ class TabFourScreen(
                             */
                         },
                         modifier = Modifier.align(Alignment.CenterHorizontally)
-                            .background(surfaceContainerDark)
                     ) {
                         Text(text = "Management Dashboard")
                     }
@@ -105,7 +113,6 @@ class TabFourScreen(
                             ))
                         },
                         modifier = Modifier.align(Alignment.CenterHorizontally)
-                            .background(surfaceContainerDark)
                     ) {
                         Text(text = "Add Item")
                     }
@@ -121,7 +128,6 @@ class TabFourScreen(
                             }
                         },
                         modifier = Modifier.align(Alignment.CenterHorizontally)
-                            .background(surfaceContainerDark)
                     ) {
                         Icon(
                             modifier = Modifier.alpha(if(sortedByFavorite.value) 1f else 0.38f),
