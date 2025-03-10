@@ -135,6 +135,13 @@ class GetStartedScreen(
                             Text("Allow notifications")
                         }
                         Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            // TODO-IMPLEMENT
+                        }
+                        ) {
+                            Text("Allow location permission")
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Login",
                             color = Color.White,
