@@ -152,7 +152,13 @@ class GetStartedScreen(
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Button(onClick = {
-                                // TODO-IMPLEMENT
+                                scope.launch {
+                                    checkPermissions(
+                                        permission = Permission.REMOTE_NOTIFICATION,
+                                        controller = controller,
+                                        snackbarHostState = snackbarHostState
+                                    )
+                                }
                             }
                             ) {
                                 Text("Allow notifications")
