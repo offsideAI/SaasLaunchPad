@@ -4,11 +4,11 @@
 ## Steps
 * Initialize Nuxt project 
 ```
-npx nuxi@latest init helium
+npx nuxi@latest init saaslaunchpad
 ```
 
 ```
-─❯ npx nuxi@latest init helium
+─❯ npx nuxi@latest init saaslaunchpad
 Need to install the following packages:
 nuxi@3.22.5
 Ok to proceed? (y) y
