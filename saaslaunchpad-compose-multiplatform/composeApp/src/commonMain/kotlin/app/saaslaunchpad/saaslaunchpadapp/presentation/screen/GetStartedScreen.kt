@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -97,121 +98,123 @@ class GetStartedScreen(
             println("We are logged in it seems - navigate to BottomNavigationMainScreen")
             navigator?.push(BottomNavigationMainScreen(prefs = prefs))
         } else {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        brush = createGradientEffect(
-                            colors = ThemeUtils.GradientColors,
-                            isVertical = true
-                        )
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) ||
-                    (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO && djangoUser == null)) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "SaaS Launch Pad",
-                            color = Color.White,
-                            style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Icon(
-                            painter = painterResource(Res.drawable.app_icon_splash_vector),
-                            contentDescription = "Profile",
-                            modifier = Modifier.size(48.dp)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Button(onClick = {
-                            // TODO-IMPLEMENT
-                        }
+            Scaffold {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            brush = createGradientEffect(
+                                colors = ThemeUtils.GradientColors,
+                                isVertical = true
+                            )
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if ((FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.FIREBASE && firebaseUser == null) ||
+                        (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO && djangoUser == null)) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text("Allow notifications")
+                            Text(
+                                text = "SaaS Launch Pad",
+                                color = Color.White,
+                                style = MaterialTheme.typography.headlineSmall,
+                                modifier = Modifier.align(Alignment.CenterHorizontally)
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Icon(
+                                painter = painterResource(Res.drawable.app_icon_splash_vector),
+                                contentDescription = "Profile",
+                                modifier = Modifier.size(48.dp)
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Button(onClick = {
+                                // TODO-IMPLEMENT
+                            }
+                            ) {
+                                Text("Allow notifications")
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Button(onClick = {
+                                // TODO-IMPLEMENT
+                            }
+                            ) {
+                                Text("Allow location permission")
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Login",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier
+                                    .align(Alignment.CenterHorizontally)
+                                    .padding(8.dp)
+                                    .clickable {
+                                        navigator?.push(LoginScreen(prefs))
+                                    }
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Register",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier
+                                    .align(Alignment.CenterHorizontally)
+                                    .padding(8.dp)
+                                    .clickable {
+                                        navigator?.push(RegistrationScreen(prefs = prefs))
+                                    }
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Onboarding",
+                                color = Color.White,
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier
+                                    .align(Alignment.CenterHorizontally)
+                                    .padding(8.dp)
+                                    .clickable {
+                                        navigator?.push(OnboardingScreen(prefs))
+                                    }
+                            )
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Button(onClick = {
-                            // TODO-IMPLEMENT
-                        }
+                    } else {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 50.dp)
                         ) {
-                            Text("Allow location permission")
+                            Text(
+                                text = "SaaS Launch Pad",
+                                color = Color.White,
+                                style = MaterialTheme.typography.headlineSmall,
+                                modifier = Modifier.align(Alignment.CenterHorizontally)
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "Fullstack Saas Platform Starter Kit",
+                                color = Color.White,
+                                style = MaterialTheme.typography.headlineSmall,
+                                modifier = Modifier.align(Alignment.CenterHorizontally)
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Button(
+                                onClick = {
+                                    navigator?.push(BottomNavigationMainScreen(prefs = prefs))
+                                },
+                                modifier = Modifier.align(Alignment.CenterHorizontally)
+                                    .background(surfaceContainerDark)
+                            ) {
+                                Text(text = "Get Started")
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = "Login",
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(8.dp)
-                                .clickable {
-                                    navigator?.push(LoginScreen(prefs))
-                                }
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = "Register",
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(8.dp)
-                                .clickable {
-                                    navigator?.push(RegistrationScreen(prefs = prefs))
-                                }
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = "Onboarding",
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(8.dp)
-                                .clickable {
-                                    navigator?.push(OnboardingScreen(prefs))
-                                }
-                        )
                     }
-                } else {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 50.dp)
-                    ) {
-                        Text(
-                            text = "SaaS Launch Pad",
-                            color = Color.White,
-                            style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = "Fullstack Saas Platform Starter Kit",
-                            color = Color.White,
-                            style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Button(
-                            onClick = {
-                                navigator?.push(BottomNavigationMainScreen(prefs = prefs))
-                            },
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                                .background(surfaceContainerDark)
-                        ) {
-                            Text(text = "Get Started")
-                        }
-                        Spacer(modifier = Modifier.height(8.dp))
-                    }
-                }
 
+                }
             }
         }
     }
