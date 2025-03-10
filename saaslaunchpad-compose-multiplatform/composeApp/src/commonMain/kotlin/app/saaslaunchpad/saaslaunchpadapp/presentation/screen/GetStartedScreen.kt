@@ -49,6 +49,8 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import dev.icerock.moko.permissions.compose.BindEffect
+import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -64,7 +66,6 @@ class GetStartedScreen(
         var text by remember {
             mutableStateOf("")
         }
-        val scope = rememberCoroutineScope()
         val auth = remember { Firebase.auth }
         val djangoAuthService = remember { DjangoAuthService() }
         var firebaseUser: FirebaseUser? by remember { mutableStateOf(null) }
@@ -72,6 +73,11 @@ class GetStartedScreen(
         var userEmail by remember { mutableStateOf("") }
         var userPassword by remember { mutableStateOf("") }
         val snackbarHostState = remember { SnackbarHostState() }
+        val scope = rememberCoroutineScope()
+        val factory = rememberPermissionsControllerFactory()
+        val controller = remember(factory) {
+            factory.createPermissionsController()
+        }
 
         val isLoggedIn by prefs
             .data
@@ -88,6 +94,8 @@ class GetStartedScreen(
                 it[isLoggedInKeyDjango] ?: false
             }
             .collectAsState(false)
+
+        BindEffect(controller)
 
         LaunchedEffect(Unit) {
             if (FeatureConfiguration.AuthBackend.ACTIVE == FeatureConfiguration.AuthBackend.DJANGO) {
