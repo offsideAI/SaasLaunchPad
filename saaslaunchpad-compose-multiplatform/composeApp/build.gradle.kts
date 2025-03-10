@@ -53,6 +53,7 @@ kotlin {
             implementation(libs.timber)  // Add Timber for logging
             implementation(libs.koin.android)
             implementation(libs.androidx.core.splashscreen)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -83,7 +84,6 @@ kotlin {
             implementation(libs.kotlin.coroutines)
             implementation(libs.stately.common)
 
-            implementation(libs.landscapist.coil3)
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.koin.core)
@@ -93,6 +93,7 @@ kotlin {
             api(libs.datastore.preferences)
             api(libs.datastore)
             implementation(libs.moko.permissions)
+            implementation(libs.kamel.image.default)
 
         }
 
