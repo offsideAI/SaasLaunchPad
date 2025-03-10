@@ -15,8 +15,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -49,6 +51,11 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.auth.FirebaseUser
 import dev.gitlive.firebase.auth.auth
+import dev.icerock.moko.permissions.DeniedAlwaysException
+import dev.icerock.moko.permissions.DeniedException
+import dev.icerock.moko.permissions.Permission
+import dev.icerock.moko.permissions.PermissionsController
+import dev.icerock.moko.permissions.RequestCanceledException
 import dev.icerock.moko.permissions.compose.BindEffect
 import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import kotlinx.coroutines.flow.map
@@ -232,5 +239,43 @@ class GetStartedScreen(
             }
         }
     }
+}
 
+suspend fun checkPermissions(
+    permission: Permission,
+    controller: PermissionsController,
+    snackbarHostState: SnackbarHostState
+) {
+    val granted = controller.isPermissionGranted(permission)
+    if (!granted) {
+        try {
+            controller.providePermission(permission)
+        } catch (e: DeniedException) {
+            val result = snackbarHostState.showSnackbar(
+                message = "Denied",
+                actionLabel = "Open Settings",
+                duration = SnackbarDuration.Long
+            )
+            if (result == SnackbarResult.ActionPerformed) {
+                controller.openAppSettings()
+            }
+        } catch (e: DeniedAlwaysException) {
+            val result = snackbarHostState.showSnackbar(
+                message = "Permanently Denied",
+                actionLabel = "Open Settings",
+                duration = SnackbarDuration.Long
+            )
+            if (result == SnackbarResult.ActionPerformed) {
+                controller.openAppSettings()
+            }
+        } catch (e: RequestCanceledException) {
+            snackbarHostState.showSnackbar(
+                message = "Request canceled."
+            )
+        }
+    } else {
+        snackbarHostState.showSnackbar(
+            message = "Permission already granted"
+        )
+    }
 }
