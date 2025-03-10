@@ -36,6 +36,7 @@ import androidx.datastore.preferences.core.edit
 import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
+import app.saaslaunchpad.saaslaunchpadapp.bottomnavigation.TabTwoScreenDetail
 import app.saaslaunchpad.saaslaunchpadapp.config.FeatureConfiguration
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
@@ -126,6 +127,13 @@ class GetStartedScreen(
                             contentDescription = "Profile",
                             modifier = Modifier.size(48.dp)
                         )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Button(onClick = {
+                            // TODO-IMPLEMENT
+                        }
+                        ) {
+                            Text("Allow notifications")
+                        }
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Login",
