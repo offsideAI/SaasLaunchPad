@@ -17,25 +17,26 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
-import com.skydoves.landscapist.ImageOptions
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Star
-import com.skydoves.landscapist.coil3.CoilImage
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.font.FontWeight
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 
 @Composable
 fun MemeView(
     meme: Meme,
     onClick: () -> Unit
 ) {
+    val painterResource = asyncPainterResource(data = meme?.image ?: "")
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,13 +50,13 @@ fun MemeView(
                 .size(120.dp)
                 .clip(RoundedCornerShape(size = 12.dp))
         ) {
-            CoilImage(
-                modifier = Modifier.fillMaxSize(),
-                imageModel = { meme.image },
-                imageOptions = ImageOptions(
-                    contentScale = ContentScale.Crop,
-                    alignment = Alignment.Center
-                )
+            KamelImage(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
+                    .fillMaxWidth(),
+                resource = painterResource,
+                contentDescription = "Meme image",
+                contentScale = ContentScale.Crop
             )
 
             if (meme.isFavorite) {
