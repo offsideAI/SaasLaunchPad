@@ -15,6 +15,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -69,6 +71,7 @@ class GetStartedScreen(
         var djangoUser: DjangoUser? by remember { mutableStateOf(null) }
         var userEmail by remember { mutableStateOf("") }
         var userPassword by remember { mutableStateOf("") }
+        val snackbarHostState = remember { SnackbarHostState() }
 
         val isLoggedIn by prefs
             .data
@@ -98,7 +101,10 @@ class GetStartedScreen(
             println("We are logged in it seems - navigate to BottomNavigationMainScreen")
             navigator?.push(BottomNavigationMainScreen(prefs = prefs))
         } else {
-            Scaffold {
+            Scaffold(
+                snackbarHost = { SnackbarHost(snackbarHostState) }
+            ) {
+
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
