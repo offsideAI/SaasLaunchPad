@@ -132,7 +132,7 @@ class LandingScreen(
                                 .align(Alignment.CenterHorizontally)
                                 .padding(8.dp)
                                 .clickable {
-                                    navigator?.push(LoginScreen(prefs))
+                                    navigator?.push(GetStartedScreen(prefs))
                                 }
                         )
                         /* TODO-FIXME-CLEANUP
