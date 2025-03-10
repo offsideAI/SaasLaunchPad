@@ -92,6 +92,7 @@ kotlin {
             implementation(libs.firebase.auth)
             api(libs.datastore.preferences)
             api(libs.datastore)
+            implementation(libs.moko.permissions)
 
         }
 
