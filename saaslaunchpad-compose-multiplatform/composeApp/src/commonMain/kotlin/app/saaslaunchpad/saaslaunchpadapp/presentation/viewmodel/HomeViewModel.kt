@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import app.saaslaunchpad.saaslaunchpadapp.domain.CurrencyApiService
+import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiService
 import app.saaslaunchpad.saaslaunchpadapp.domain.MongoRepository
 import app.saaslaunchpad.saaslaunchpadapp.domain.PreferencesRepository
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Currency

@@ -14,7 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import app.saaslaunchpad.saaslaunchpadapp.domain.CurrencyApiService
+import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiService
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.CurrencyType
 import app.saaslaunchpad.saaslaunchpadapp.presentation.component.CurrencyPickerDialog
 import app.saaslaunchpad.saaslaunchpadapp.presentation.component.HomeBody

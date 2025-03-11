@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import app.saaslaunchpad.saaslaunchpadapp.domain.CurrencyApiService
+import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiService
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Post
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.PostViewModel
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils

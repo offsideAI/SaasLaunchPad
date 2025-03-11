@@ -1,4 +1,4 @@
-package app.saaslaunchpad.saaslaunchpadapp.domain
+package app.saaslaunchpad.saaslaunchpadapp.data.remote.api
 
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Currency
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.CurrencyApiRequestState

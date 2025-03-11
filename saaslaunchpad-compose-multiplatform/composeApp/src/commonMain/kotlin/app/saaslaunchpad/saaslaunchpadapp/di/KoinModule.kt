@@ -7,7 +7,7 @@ import app.saaslaunchpad.saaslaunchpadapp.data.local.PreferencesImpl
 import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiServiceImpl
 import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.PostApi
 import app.saaslaunchpad.saaslaunchpadapp.data.room.getRoomDatabase
-import app.saaslaunchpad.saaslaunchpadapp.domain.CurrencyApiService
+import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiService
 import app.saaslaunchpad.saaslaunchpadapp.domain.MongoRepository
 import app.saaslaunchpad.saaslaunchpadapp.domain.PreferencesRepository
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.HomeViewModel

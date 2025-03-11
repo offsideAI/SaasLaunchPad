@@ -1,13 +1,11 @@
 package app.saaslaunchpad.saaslaunchpadapp.data.remote.api
 
 import app.saaslaunchpad.saaslaunchpadapp.config.ApiConfig
-import app.saaslaunchpad.saaslaunchpadapp.domain.CurrencyApiService
 import app.saaslaunchpad.saaslaunchpadapp.domain.PreferencesRepository
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Currency
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.CurrencyApiResponse
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.CurrencyCode
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.CurrencyApiRequestState
-import app.saaslaunchpad.saaslaunchpadapp.domain.model.CurrencyDto
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.toCurrency
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
