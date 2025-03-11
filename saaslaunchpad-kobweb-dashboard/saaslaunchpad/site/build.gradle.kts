@@ -37,6 +37,7 @@ kotlin {
         jvmMain.dependencies {
             compileOnly(libs.kobweb.api) // Provided by Kobweb backend at runtime
 
+
         }
     }
 }
