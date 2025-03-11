@@ -47,10 +47,11 @@ fun App(
                     // intercept the back button press
                     if (isLoggedIn && currentScreen is BottomNavigationMainScreen) {
                         println("You are currently logged in")
-                        true // Consume the back press event
+                        false // Consume the back press event
                     } else {
+                        println("Back was pressed on ${currentScreen}")
                         // Default behavior - allow popping the screen
-                        false
+                        true
                     }
                 }
             ) { navigator ->
