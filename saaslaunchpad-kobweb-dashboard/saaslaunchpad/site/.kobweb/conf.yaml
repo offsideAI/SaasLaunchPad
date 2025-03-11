@@ -1,0 +1,14 @@
+site:
+  title: "SaasLaunchPadApi"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/saaslaunchpadapp.js"
+      api: "build/libs/saaslaunchpadapp.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/saaslaunchpadapp.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
