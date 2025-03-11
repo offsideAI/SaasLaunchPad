@@ -1,7 +1,7 @@
 [versions]
 agp = "8.5.2"
 android-compileSdk = "35"
-android-minSdk = "28"
+android-minSdk = "24"
 android-targetSdk = "35"
 androidx-activityCompose = "1.9.3"
 compose = "1.7.6"
@@ -43,8 +43,8 @@ kotlinDateTime = "0.6.1"
 firebaseCrashlyticsBuildtools = "3.0.3"
 lifecycleViewmodelAndroid = "2.8.7"
 voyager = "1.1.0-beta03"
-kamel = "1.0.3"
-room = "2.7.0-rc01"
+landscapist = "2.4.7"
+room = "2.7.0-alpha01"
 ksp = "2.0.20-1.0.25"
 sqlite = "2.5.0-rc01"
 navigationRuntimeAndroidVersion = "2.9.0-alpha07"
@@ -53,6 +53,7 @@ core-splashscreen = "1.0.1"
 runtimeAndroid = "1.7.8"
 [libraries]
 
+landscapist-coil3 = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist"}
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
@@ -121,7 +122,6 @@ androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 moko-permissions = { group = "dev.icerock.moko", name = "permissions-compose", version.ref = "moko" }
-kamel-image-default = { group = "media.kamel", name = "kamel-image-default", version.ref = "kamel" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

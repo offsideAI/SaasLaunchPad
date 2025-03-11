@@ -83,9 +83,8 @@ kotlin {
             implementation(libs.mongodb.realm)
             implementation(libs.kotlin.coroutines)
             implementation(libs.stately.common)
+            implementation(libs.landscapist.coil3)
 
-            implementation(libs.room.runtime)
-            implementation(libs.sqlite.bundled)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
@@ -93,8 +92,6 @@ kotlin {
             api(libs.datastore.preferences)
             api(libs.datastore)
             implementation(libs.moko.permissions)
-            implementation(libs.kamel.image.default)
-
         }
 
         iosMain.dependencies {

@@ -1,6 +1,6 @@
 package app.saaslaunchpad.saaslaunchpadapp.di
 
-import app.saaslaunchpad.saaslaunchpadapp.data.ParadigmaticDatabase
+import app.saaslaunchpad.saaslaunchpadapp.data.SaasLaunchPadDatabase
 import app.saaslaunchpad.saaslaunchpadapp.data.local.LocalDatabase
 import app.saaslaunchpad.saaslaunchpadapp.data.local.MongoImpl
 import app.saaslaunchpad.saaslaunchpadapp.data.local.PreferencesImpl
@@ -43,8 +43,8 @@ val sharedModule = module {
     ) }
     single<Settings> { Settings() }
 
-    single<ParadigmaticDatabase> {
-        ParadigmaticDatabase(
+    single<SaasLaunchPadDatabase> {
+        SaasLaunchPadDatabase(
             api = get(),
             database = get(),
             settings = get()

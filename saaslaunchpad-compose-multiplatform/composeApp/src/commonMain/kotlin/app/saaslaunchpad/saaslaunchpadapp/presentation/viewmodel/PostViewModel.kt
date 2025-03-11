@@ -3,7 +3,7 @@ package app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import app.saaslaunchpad.saaslaunchpadapp.data.ParadigmaticDatabase
+import app.saaslaunchpad.saaslaunchpadapp.data.SaasLaunchPadDatabase
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Post
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.PostApiRequestState
 import cafe.adriel.voyager.core.model.ScreenModel
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 typealias CachedPosts = MutableState<PostApiRequestState<List<Post>>>
 
 class PostViewModel (
-    private val database: ParadigmaticDatabase
+    private val database: SaasLaunchPadDatabase
 ): ScreenModel {
 
     /* TODO-FIXME-CLEANUP

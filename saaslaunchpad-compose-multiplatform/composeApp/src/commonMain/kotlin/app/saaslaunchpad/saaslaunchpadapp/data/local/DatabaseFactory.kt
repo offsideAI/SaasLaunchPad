@@ -2,7 +2,7 @@ package app.saaslaunchpad.saaslaunchpadapp.data.local
 
 import app.cash.sqldelight.db.SqlDriver
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Post
-import app.saaslaunchpad.saaslaunchpadapp.data.ParadigmaticDatabase
+import app.saaslaunchpad.saaslaunchpadapp.data.SaasLaunchPadDatabase
 
 interface DatabaseDriverFactory {
     fun createDriver(): SqlDriver
@@ -14,7 +14,8 @@ class LocalDatabase(
     private val database = app.saaslaunchpad.saaslaunchpadapp.SaasLaunchPadDatabase(
         databaseDriverFactory.createDriver()
     )
-    private val query = database.paradigmaticDatabaseQueries
+    // TODO-FIXME-CLEANUP-REVERT-AFTER-DEBUG private val query = database.paradigmaticDatabaseQueries
+    private val query = database.saasLaunchPadDatabaseQueries
 
     fun readAllPosts(): List<Post> {
         println("INFO: Read the cached data from the local database")

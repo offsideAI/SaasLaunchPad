@@ -36,8 +36,8 @@ import androidx.compose.ui.unit.dp
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.ManageViewModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil3.CoilImage
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.component.KoinComponent
@@ -62,7 +62,6 @@ class TabFourScreenManage(
 
         val snackBarHostState = remember { SnackbarHostState() }
         val localCoroutineScope = rememberCoroutineScope()
-        val painterResource = asyncPainterResource(data = imageField ?: "")
         Scaffold(
             snackbarHost = {
                 SnackbarHost(snackBarHostState)
@@ -185,13 +184,15 @@ class TabFourScreenManage(
                         .fillMaxSize()
                         .fillMaxWidth()
                 ) {
-                    KamelImage(
+                    CoilImage(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(12.dp))
+                            .clip(RoundedCornerShape(size = 12.dp))
                             .fillMaxWidth(),
-                        resource = painterResource,
-                        contentDescription = "Meme image",
-                        contentScale = ContentScale.Crop
+                        imageModel = { imageField },
+                        imageOptions = ImageOptions(
+                            contentScale = ContentScale.Crop,
+                            alignment = Alignment.Center
+                        )
                     )
                 }
             }

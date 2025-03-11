@@ -2,41 +2,39 @@ package app.saaslaunchpad.saaslaunchpadapp.presentation.meme
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import app.saaslaunchpad.saaslaunchpadapp.domain.model.Meme
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Column
-import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import app.saaslaunchpad.saaslaunchpadapp.domain.model.Meme
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil3.CoilImage
 
 @Composable
 fun MemeView(
     meme: Meme,
     onClick: () -> Unit
 ) {
-    val painterResource = asyncPainterResource(data = meme?.image ?: "")
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -50,13 +48,15 @@ fun MemeView(
                 .size(120.dp)
                 .clip(RoundedCornerShape(size = 12.dp))
         ) {
-            KamelImage(
+            CoilImage(
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp))
                     .fillMaxWidth(),
-                resource = painterResource,
-                contentDescription = "Meme image",
-                contentScale = ContentScale.Crop
+                imageModel = { meme.image },
+                imageOptions = ImageOptions(
+                   contentScale = ContentScale.Crop,
+                   alignment = Alignment.Center
+                ),
             )
 
             if (meme.isFavorite) {

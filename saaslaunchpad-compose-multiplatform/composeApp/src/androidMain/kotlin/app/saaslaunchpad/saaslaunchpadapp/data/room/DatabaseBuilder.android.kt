@@ -8,6 +8,7 @@ fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<MemeDatabase> {
     val dbFile = context.getDatabasePath("meme.db")
     return Room.databaseBuilder(
         context = context,
+        klass = MemeDatabase::class.java,
         name = dbFile.absolutePath
     )
 }

@@ -1,10 +1,7 @@
 package app.saaslaunchpad.saaslaunchpadapp.data.room
 
-import androidx.room.ConstructedBy
 import androidx.room.Database
-import androidx.room.InvalidationTracker
 import androidx.room.RoomDatabase
-import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverter
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Meme
 import app.saaslaunchpad.saaslaunchpadapp.data.dao.MemeDao
@@ -17,17 +14,15 @@ import kotlinx.serialization.json.Json
     version = 1,
     exportSchema = true
 )
-
-@ConstructedBy(MemeDatabaseConstructor::class)
 abstract class MemeDatabase: RoomDatabase() {
     abstract fun memeDao(): MemeDao
-}
-
-@Suppress(
-    "NO_ACTUAL_FOR_EXPECT"
-)
-expect object MemeDatabaseConstructor: RoomDatabaseConstructor<MemeDatabase> {
-    override fun initialize(): MemeDatabase
+    
+    companion object {
+        // Factory method to create the database
+        fun create(builder: RoomDatabase.Builder<MemeDatabase>): MemeDatabase {
+            return builder.build()
+        }
+    }
 }
 
 class MemeTypeConverter {

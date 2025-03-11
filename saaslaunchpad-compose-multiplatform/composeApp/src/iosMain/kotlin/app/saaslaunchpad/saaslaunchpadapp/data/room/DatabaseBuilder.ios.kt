@@ -1,11 +1,9 @@
 package app.saaslaunchpad.saaslaunchpadapp.data.room
 
-import androidx.room.RoomDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
-import androidx.room.Room
 
 fun getDatabaseBuilder(): RoomDatabase.Builder<MemeDatabase> {
     val dbFile = documentDirectory() + "/meme.db"

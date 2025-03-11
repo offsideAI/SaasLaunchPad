@@ -1,7 +1,6 @@
 package app.saaslaunchpad.saaslaunchpadapp.data.room
 
 import androidx.room.RoomDatabase
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
@@ -10,7 +9,8 @@ fun getRoomDatabase(
 ): MemeDatabase {
     return builder
         .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
-        .setDriver(BundledSQLiteDriver())
+        // Remove the setDriver call since it's not available
+        // .setDriver(SQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
         .build()
 }

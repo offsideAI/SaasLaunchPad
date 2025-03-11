@@ -11,7 +11,7 @@ import app.saaslaunchpad.saaslaunchpadapp.domain.model.Post
 
 const val FRESH_DATA_KEY = "freshDataTimestamp"
 
-class ParadigmaticDatabase (
+class SaasLaunchPadDatabase (
     private val api: PostApi,
     private val database: LocalDatabase,
     private val settings: Settings
@@ -19,8 +19,7 @@ class ParadigmaticDatabase (
     @Throws(Exception::class)
     suspend fun getAllPosts(): PostApiRequestState<List<Post>> {
 
-        /*
-        TODO-FIXME-UNCOMMENT-BELOW-TO-BRING-BACK-CACHING
+        /* TODO-FIXME-CLEAN-REVERT-AFTER-DEBUG
         return try {
             val cachedPosts = database.readAllPosts()
             if (cachedPosts.isEmpty()) {
@@ -48,7 +47,11 @@ class ParadigmaticDatabase (
                     )
                 } else PostApiRequestState.Success(cachedPosts)
             }
-         */
+        } catch (e: Exception) {
+            PostApiRequestState.Error(e.message.toString())
+        }
+        */
+
         return try {
                 PostApiRequestState.Success(
                     api.fetchAllPosts()

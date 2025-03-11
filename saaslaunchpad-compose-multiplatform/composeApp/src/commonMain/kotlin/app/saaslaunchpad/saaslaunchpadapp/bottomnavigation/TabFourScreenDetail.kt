@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -35,8 +36,8 @@ import androidx.compose.ui.unit.dp
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.DetailViewModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil3.CoilImage
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -52,7 +53,6 @@ class TabFourScreenDetail(
         val viewModel = koinViewModel<DetailViewModel>(parameters = { parametersOf(number) })
         val selectedMeme by viewModel.selectedMeme
         val isFavorite by viewModel.isFavorite
-        val painterResource = asyncPainterResource(data = selectedMeme?.image ?: "")
         Scaffold(
             modifier = Modifier
                 .fillMaxSize(),
@@ -138,13 +138,15 @@ class TabFourScreenDetail(
                         .fillMaxSize()
                         .fillMaxWidth()
                 ) {
-                    KamelImage(
+                    CoilImage(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(12.dp))
+                            .clip(RoundedCornerShape(size = 12.dp))
                             .fillMaxWidth(),
-                        resource = painterResource,
-                        contentDescription = "Meme image",
-                        contentScale = ContentScale.Crop
+                        imageModel = { selectedMeme?.image },
+                        imageOptions = ImageOptions(
+                            contentScale = ContentScale.Crop,
+                            alignment = Alignment.Center
+                        )
                     )
                 }
                 Spacer(modifier = Modifier.height(12.dp))
