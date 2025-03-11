@@ -5,7 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<MemeDatabase> {
-    val dbFile = context.getDatabasePath("meme.db")
+    val dbFile = context.getDatabasePath("saaslaunchpad.db")
     return Room.databaseBuilder(
         context = context,
         klass = MemeDatabase::class.java,

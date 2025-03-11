@@ -51,6 +51,7 @@ navigationRuntimeAndroidVersion = "2.9.0-alpha07"
 roomCommonJvm = "2.7.0-rc01"
 core-splashscreen = "1.0.1"
 runtimeAndroid = "1.7.8"
+roomKtx = "2.6.1"
 [libraries]
 
 landscapist-coil3 = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist"}
@@ -122,6 +123,7 @@ androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 moko-permissions = { group = "dev.icerock.moko", name = "permissions-compose", version.ref = "moko" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

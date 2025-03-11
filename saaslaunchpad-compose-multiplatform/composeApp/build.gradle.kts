@@ -209,6 +209,7 @@ room {
 }
 
 dependencies {
+    implementation(libs.androidx.room.ktx)
     add("kspAndroid", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
