@@ -119,7 +119,7 @@ class TabFourScreen(
                     Spacer(modifier = Modifier.height(4.dp))
                     Button(
                         onClick = {
-                            if (memes.isSucces() && memes.getSuccessData().size >= 2) {
+                            if (memes.isSuccess() && memes.getSuccessData().size >= 2) {
                                 viewModel.toggleSortByFavorite()
                                 scope.launch {
                                     delay(100)

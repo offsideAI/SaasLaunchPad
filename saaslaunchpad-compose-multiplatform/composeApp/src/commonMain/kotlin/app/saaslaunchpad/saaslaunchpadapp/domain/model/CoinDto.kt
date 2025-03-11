@@ -1,12 +1,15 @@
 package app.saaslaunchpad.saaslaunchpadapp.domain.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class CoinDto(
     val id: String,
-    val is_active: Boolean,
-    val is_new: Boolean,
+    @SerialName("is_active")
+    val isActive: Boolean,
+    @SerialName("is_new")
+    val isNew: Boolean,
     val name: String,
     val rank: Int,
     val symbol: String,

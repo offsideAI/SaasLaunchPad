@@ -23,7 +23,7 @@ sealed class RequestState<out T> {
 
     fun isLoading(): Boolean = this is Loading
     fun isError(): Boolean = this is Error
-    fun isSucces(): Boolean = this is Success
+    fun isSuccess(): Boolean = this is Success
 
     fun getSuccessData() = (this as Success).data
     fun getErrorMessage(): String = (this as Error).message

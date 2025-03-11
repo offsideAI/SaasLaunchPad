@@ -4,12 +4,15 @@ import app.saaslaunchpad.saaslaunchpadapp.data.SaasLaunchPadDatabase
 import app.saaslaunchpad.saaslaunchpadapp.data.local.LocalDatabase
 import app.saaslaunchpad.saaslaunchpadapp.data.local.MongoImpl
 import app.saaslaunchpad.saaslaunchpadapp.data.local.PreferencesImpl
+import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CoinPaprikaApiService
+import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CoinPaprikaApiServiceImpl
 import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiServiceImpl
 import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.PostApi
 import app.saaslaunchpad.saaslaunchpadapp.data.room.getRoomDatabase
 import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiService
 import app.saaslaunchpad.saaslaunchpadapp.domain.MongoRepository
 import app.saaslaunchpad.saaslaunchpadapp.domain.PreferencesRepository
+import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.CoinViewModel
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.HomeViewModel
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.MemeViewModel
 import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.PostViewModel
@@ -28,6 +31,7 @@ val sharedModule = module {
     single<MongoRepository> { MongoImpl() }
     single<PreferencesRepository> { PreferencesImpl(settings = get()) }
     single<CurrencyApiService> { CurrencyApiServiceImpl(preferences = get() )}
+    single<CoinPaprikaApiService> { CoinPaprikaApiServiceImpl() }
 
     factory {
         HomeViewModel(
@@ -52,6 +56,12 @@ val sharedModule = module {
     }
     factory { PostViewModel(
             database = get()
+        )
+    }
+
+    factory {
+        CoinViewModel(
+            apiService = get()
         )
     }
 

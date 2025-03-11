@@ -1,9 +1,11 @@
 package app.saaslaunchpad.saaslaunchpadapp.bottomnavigation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,12 +24,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CurrencyApiService
+import app.saaslaunchpad.saaslaunchpadapp.data.remote.api.CoinPaprikaApiService
+import app.saaslaunchpad.saaslaunchpadapp.domain.model.CoinDto
 import app.saaslaunchpad.saaslaunchpadapp.domain.model.Post
-import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.PostViewModel
+import app.saaslaunchpad.saaslaunchpadapp.presentation.viewmodel.CoinViewModel
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.primaryColor
 import app.saaslaunchpad.saaslaunchpadapp.util.createGradientEffect
@@ -37,17 +41,20 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class TabOneScreen : Screen, KoinComponent {
-    private val currencyApiService: CurrencyApiService by inject()
+    // TODO-FIXME-CLEANUP private val currencyApiService: CurrencyApiService by inject()
+    private val coinPaprikaApiService: CoinPaprikaApiService by inject()
 
     @Composable
     override fun Content() {
-        val viewModel = getScreenModel<PostViewModel>()
-        val allPosts by viewModel.allPosts
+        // TODO-FIXME-CLEANUP val viewModel = getScreenModel<PostViewModel>()
+        // TODO-FIXME-CLEANUP val allPosts by viewModel.allPosts
+        val viewModel = getScreenModel<CoinViewModel>()
+        val allCoins by viewModel.allCoins
 
-        // Retain the original business logic
         LaunchedEffect(Unit) {
             println("TabOneScreen")
-            currencyApiService.getLatestExchangeRates()
+            // TODO-FIXME-CLEANUP currencyApiService.getLatestExchangeRates()
+            coinPaprikaApiService.getCoins()
         }
 
         Box(
@@ -61,8 +68,8 @@ class TabOneScreen : Screen, KoinComponent {
                 ),
             contentAlignment = Alignment.Center
         ) {
-            if (allPosts.isSuccess()) {
-                val data = remember { allPosts.getSuccessData() }
+            if (allCoins.isSuccess()) {
+                val data = remember { allCoins.getSuccessData() }
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp)
@@ -70,11 +77,11 @@ class TabOneScreen : Screen, KoinComponent {
                     items(
                         items = data,
                         key = { it.id }
-                    ) { post ->
-                        PostCard(post = post)
+                    ) { coin ->
+                        CoinCard(coin = coin)
                     }
                 }
-            } else if (allPosts.isError()) {
+            } else if (allCoins.isError()) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -83,11 +90,73 @@ class TabOneScreen : Screen, KoinComponent {
                 ) {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
-                        text = allPosts.getErrorMessage(),
+                        text = allCoins.getErrorMessage(),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun CoinCard(coin: CoinDto) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "${coin.name} (${coin.symbol})",
+                    style = MaterialTheme.typography.headlineSmall.copy(color = primaryColor),
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "#${coin.rank}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Type: ${coin.type}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+
+                val statusColor = if(coin.isActive) Color.Green else Color.Red
+                Text(
+                    text = if(coin.isActive) "Active" else "Inactive",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = statusColor
+                )
+            }
+
+            if (coin.isNew) {
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "NEW",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Blue,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }
