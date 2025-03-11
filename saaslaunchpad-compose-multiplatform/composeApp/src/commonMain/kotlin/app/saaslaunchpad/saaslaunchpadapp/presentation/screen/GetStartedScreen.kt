@@ -20,7 +20,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -32,16 +31,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
 import app.saadlaunchpad.saaslaunchpadapp.bottomnavigation.BottomNavigationMainScreen
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoAuthService
 import app.saaslaunchpad.saaslaunchpadapp.auth.DjangoUser
-import app.saaslaunchpad.saaslaunchpadapp.bottomnavigation.TabTwoScreenDetail
 import app.saaslaunchpad.saaslaunchpadapp.config.FeatureConfiguration
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.ThemeUtils
 import app.saaslaunchpad.saaslaunchpadapp.ui.theme.surfaceContainerDark
@@ -165,7 +161,13 @@ class GetStartedScreen(
                             }
                             Spacer(modifier = Modifier.height(8.dp))
                             Button(onClick = {
-                                // TODO-IMPLEMENT
+                                scope.launch {
+                                    checkPermissions(
+                                        permission = Permission.LOCATION,
+                                        controller = controller,
+                                        snackbarHostState = snackbarHostState
+                                    )
+                                }
                             }
                             ) {
                                 Text("Allow location permission")
