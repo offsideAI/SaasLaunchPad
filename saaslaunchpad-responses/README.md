@@ -4,13 +4,16 @@
 
 * Clone the repo
 ```
-git clone git@github.com:browser-use/web-ui.git
+
+export OPENAI_API_KEY=xxxxxxxxx
 
 ```
 
 
 * Create virtual environment
 ```
+cd saaslaunchpad-responses
+
 uv venv --python 3.11
 ```
 
@@ -18,6 +21,8 @@ uv venv --python 3.11
 
 ```
 source .venv/bin/activate
+
+touch app.py
 ```
 
 * Install Dependencies - python packages
