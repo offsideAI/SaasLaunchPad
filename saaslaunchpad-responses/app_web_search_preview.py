@@ -9,7 +9,7 @@ def generate_response(api_key, prompt):
     try:
         response = client.responses.create(
             model="gpt-4o",
-            tools=[{"type": "web_search_preview"}]
+            tools=[{"type": "web_search_preview"}],
             input=prompt
         )
         return response.output_text

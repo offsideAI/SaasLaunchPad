@@ -14,7 +14,6 @@ class LocalDatabase(
     private val database = app.saaslaunchpad.saaslaunchpadapp.SaasLaunchPadDatabase(
         databaseDriverFactory.createDriver()
     )
-    // TODO-FIXME-CLEANUP-REVERT-AFTER-DEBUG private val query = database.paradigmaticDatabaseQueries
     private val query = database.saasLaunchPadDatabaseQueries
 
     fun readAllPosts(): List<Post> {
