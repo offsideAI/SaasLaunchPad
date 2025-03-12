@@ -24,7 +24,13 @@ source .venv/bin/activate
 
 uv pip install openai
 
+uv pip install gradio
+
+uv pip install -r requirements.txt
+
 touch app.py
+
+python app.py 
 ```
 
 * Install Dependencies - python packages
