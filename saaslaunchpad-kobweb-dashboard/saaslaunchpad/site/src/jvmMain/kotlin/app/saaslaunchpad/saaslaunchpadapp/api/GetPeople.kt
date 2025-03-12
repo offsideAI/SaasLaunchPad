@@ -15,7 +15,7 @@ val people = listOf(
     Person(name = "Jane", age = 34),
 )
 
-@Api
+@Api(routeOverride = "/api/getpeople")
 suspend fun getPeople(context: ApiContext) {
     try {
         val number = context.req.params.getValue("count").toInt()
