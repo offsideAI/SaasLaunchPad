@@ -9,10 +9,7 @@ def generate_response(api_key, prompt):
     try:
         response = client.responses.create(
             model="gpt-4o",
-            tools=[{
-                "type": "file_search",
-                "vector_store_ids": "<vector_store_id"
-            }],
+            tools=[{"type": "file_search"}],
             input=prompt
         )
         return response.output_text
