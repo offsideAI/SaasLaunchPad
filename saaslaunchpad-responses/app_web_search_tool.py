@@ -9,7 +9,7 @@ def generate_response(api_key, prompt):
     try:
         response = client.responses.create(
             model="gpt-4o",
-            tools=[{"type": "file_search"}],
+            tools=[{"type": "web_search_preview"}],
             input=prompt
         )
         return response.output_text
@@ -36,9 +36,9 @@ demo = gr.Interface(
     title="SaaS Launch Pad",
     description="Generate product specs, documentation, and more using OpenAI's Responses API",
     examples=[
-        [None, "Write a product spec for a supply-chain ERP logistics management solution"],
-        [None, "Create a marketing plan for a new fitness app"],
-        [None, "Design a user onboarding flow for a SaaS platform"]
+        [None, "Research the product spec and requirements for a supply-chain ERP logistics management solution"],
+        [None, "Research and document the PRD and marketing plan for a new fitness app"],
+        [None, "Research and design a user onboarding flow for a SaaS platform"]
     ]
 )
 

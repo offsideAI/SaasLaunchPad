@@ -8,14 +8,14 @@ def generate_response(api_key, prompt):
 
     try:
         response = client.responses.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
+            input="Tell me about the emergence of thinking in LLMs",
             tools=[
                 {
                     "type": "file_search",
-                    "vector_store_ids": os.environ.get("VECTOR_STORE_ID", "")
+                    "vector_store_ids": [os.environ.get("VECTOR_STORE_ID", "")]
                 }
-            ],
-            input=prompt
+            ]
         )
         return response.output_text
     except Exception as e:
