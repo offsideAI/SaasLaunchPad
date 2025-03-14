@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Web Scraper for Education",
+    "name": "SaasLaunchPad",
     "version": "1.0",
-    "description": "A simple extension that scrapes HTML and CSS for educational purposes",
+    "description": "A simple extension that scrapes HTML and CSS",
     "permissions": ["activeTab", "scripting", "downloads"],
     "action": {
       "default_popup": "popup.html",
