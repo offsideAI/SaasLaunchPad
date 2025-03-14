@@ -12,7 +12,7 @@ function processNode(node) {
     }
 
     if (node.nodeType === Node.TEXT_NODE
-        && node.textContent !== null && node.textContent.trim().length > 0 {
+        && node.textContent !== null && node.textContent.trim().length > 0) {
         const parent = node.parentElement
 
         if (parent !== null &&
@@ -33,3 +33,37 @@ function blurElement(element) {
         " tag: " + elem.tagName + " text:" + elem.textContent)
 }
 
+// Create a MutationObserver to watchfor changes to the DOM
+const observer = new MutationObserver( (mutations) => {
+        mutations.forEach( (mutation) => {
+           if (mutation.addedNodes.length > 0) {
+               mutation.addedNodes.forEach(processNode)
+           } else {
+               processNode(mutation.target)
+           }
+        })
+})
+
+// Enable the content script by default
+let enabled = true
+const keys = ["enabled", "item"]
+
+chrome.storage.sync.get(keys, (data) => {
+    if (data.enabled === false) {
+        enabled = false
+    }
+    if (data.item) {
+        textToBlur = data.item
+    }
+    // Only start observing the DOM if the extension is enabled and there is text to blur
+    if (enabled && textToBlur.trim().length > 0) {
+        observer.observe(document, {
+            attributes: true,
+            characterData: true,
+            childList: true,
+            subtree: true,
+        })
+        // Loop through all elements on the page for initial processing
+        processNode(document)
+    }
+})
