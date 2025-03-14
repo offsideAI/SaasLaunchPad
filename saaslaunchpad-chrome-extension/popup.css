@@ -1,0 +1,8 @@
+/* Switch - box around the slider */
+.switch {
+    margin-left: 30%;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
