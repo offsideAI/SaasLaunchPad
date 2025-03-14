@@ -3,7 +3,12 @@
     "name": "SaasLaunchPad",
     "version": "1.0",
     "description": "A simple extension that scrapes HTML and CSS",
-    "permissions": ["activeTab", "scripting", "downloads"],
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "downloads",
+        "storage"
+    ],
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
