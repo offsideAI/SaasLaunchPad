@@ -15,6 +15,7 @@ chrome.storage.sync.get("enabled", (data) => {
   void setBadgeText(data.enabled)
 })
 
+
 checkbox.addEventListener("change", (event) => {
   if (event.target instanceof HTMLInputElement) {
     void chrome.storage.sync.set({"enabled": event.target.checked})

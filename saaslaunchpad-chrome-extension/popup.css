@@ -1,3 +1,29 @@
+/* Default */
+
+body {
+    width: 300px;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #3367d6;
+}
+.status {
+    margin-top: 10px;
+    color: #4285f4;
+    font-style: italic;
+}
+
 /* Switch - box around the slider */
 .switch {
     margin-left: 30%;
