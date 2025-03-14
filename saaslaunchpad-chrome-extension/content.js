@@ -27,7 +27,7 @@ function processNode(node) {
     }
 }
 
-function blurElement(element) {
+function blurElement(elem) {
     elem.style.filter = blurFilter
     console.debug("blurred id:" + elem.id + " class:" + elem.className +
         " tag: " + elem.tagName + " text:" + elem.textContent)
