@@ -44,3 +44,27 @@ npm install --save-dev webpack webpack-cli webpack-merge copy-webpack-plugin
     webpack-merge: ^6.0.1 => 6.0.1 
 ```
 
+* Run webpack 
+
+```
+./node_modules/.bin/webpack --watch --config webpack.dev.js
+```
+
+- webpack runs as below
+
+```
+./node_modules/.bin/webpack --watch --config webpack.dev.js
+
+assets by path *.js 9.76 KiB
+  asset content.js 5.4 KiB [emitted] (name: content)
+  asset popup.js 2.87 KiB [emitted] (name: popup)
+  asset background.js 1.48 KiB [emitted] (name: background)
+asset popup.css 1.95 KiB [emitted] [from: static/popup.css] [copied]
+asset manifest.json 758 bytes [emitted] [from: static/manifest.json] [copied]
+asset popup.html 537 bytes [emitted] [from: static/popup.html] [copied]
+./src/background.js 397 bytes [built] [code generated]
+./src/content.js 1.9 KiB [built] [code generated]
+./src/popup.js 926 bytes [built] [code generated]
+webpack 5.98.0 compiled successfully in 59 ms
+
+```
