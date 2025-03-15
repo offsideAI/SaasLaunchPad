@@ -68,3 +68,9 @@ asset popup.html 537 bytes [emitted] [from: static/popup.html] [copied]
 webpack 5.98.0 compiled successfully in 59 ms
 
 ```
+
+* Install TypeScript
+
+```
+npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types/chrome
+```
