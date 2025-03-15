@@ -74,3 +74,24 @@ webpack 5.98.0 compiled successfully in 59 ms
 ```
 npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types/chrome
 ```
+
+* Add tsconfig.json for TypeScript configuration 
+
+```
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "lib": ["dom", "es2015"],
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+```
