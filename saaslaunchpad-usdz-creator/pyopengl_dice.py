@@ -394,15 +394,13 @@ class ElegantDice:
             [-1.0, -1.0, 1.0],  # Top left
         ]
         
-        # Define normals for each face
-        normals = [
-            [0.0, 0.0, 1.0],    # Front face normal (pointing towards positive z)
-            [0.0, 0.0, -1.0],   # Back face normal (pointing towards negative z)
-            [1.0, 0.0, 0.0],    # Right face normal (pointing towards positive x)
-            [-1.0, 0.0, 0.0],   # Left face normal (pointing towards negative x)
-            [0.0, 1.0, 0.0],    # Top face normal (pointing towards positive y)
-            [0.0, -1.0, 0.0],   # Bottom face normal (pointing towards negative y)
-        ]
+        # Texture coordinates for each vertex
+        tex_coords = [
+            [0.0, 0.0],
+            [1.0, 0.0],
+            [1.0, 1.0],
+            [0.0, 1.0],
+        ] * 6  # Repeat for each face
         
         # Define which vertices make up each face (as quads)
         face_indices = [
@@ -414,26 +412,16 @@ class ElegantDice:
             [20, 21, 22, 23],   # Bottom face
         ]
         
-        # Texture coordinates for each vertex of a face
-        tex_coords = [
-            [0.0, 0.0],  # Bottom left
-            [1.0, 0.0],  # Bottom right
-            [1.0, 1.0],  # Top right
-            [0.0, 1.0],  # Top left
-        ]
-        
         # Draw the cube
         glEnable(GL_TEXTURE_2D)
+        glColor3f(1.0, 1.0, 1.0)  # White to not affect texture colors
         
         for i, face in enumerate(face_indices):
             glBindTexture(GL_TEXTURE_2D, self.textures[i])
             
             glBegin(GL_QUADS)
-            # Set the normal for this face
-            glNormal3f(normals[i][0], normals[i][1], normals[i][2])
-            
             for j, vertex_idx in enumerate(face):
-                glTexCoord2f(tex_coords[j][0], tex_coords[j][1])
+                glTexCoord2f(tex_coords[vertex_idx][0], tex_coords[vertex_idx][1])
                 glVertex3f(vertices[vertex_idx][0], vertices[vertex_idx][1], vertices[vertex_idx][2])
             glEnd()
         
@@ -443,12 +431,6 @@ class ElegantDice:
         roll_active = False
         roll_start_time = 0
         roll_duration = 2  # seconds
-        
-        # Print debug info
-        print("OpenGL Version:", glGetString(GL_VERSION).decode())
-        print("Textures created:", len(self.textures))
-        for i, tex_id in enumerate(self.textures):
-            print(f"Texture {i+1} ID: {tex_id}")
         
         while True:
             for event in pygame.event.get():

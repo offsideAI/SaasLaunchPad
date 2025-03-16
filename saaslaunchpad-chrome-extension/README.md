@@ -48,6 +48,14 @@ npm install --save-dev webpack webpack-cli webpack-merge copy-webpack-plugin
 
 ```
 ./node_modules/.bin/webpack --watch --config webpack.dev.js
+
+OR
+
+./node_modules/.bin/webpack --watch --config webpack.dev.ts --require ts-node/register
+
+OR
+
+npm run watch
 ```
 
 - webpack runs as below
@@ -94,4 +102,3 @@ npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
-```

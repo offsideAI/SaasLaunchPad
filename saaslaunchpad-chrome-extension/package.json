@@ -4,10 +4,12 @@
   "description": "SaasLaunchPad Chrome Extension",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
   "main": "background.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build_bak": "webpack --config webpack.prod.ts",
+    "start_bak": "webpack --watch --config webpack.dev.ts",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "start": "webpack --watch --config webpack.config.js"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.8",
