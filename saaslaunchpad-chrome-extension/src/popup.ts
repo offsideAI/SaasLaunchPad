@@ -1,6 +1,6 @@
 import { setBadgeText } from "./common"
 
-console.log("Welcome to SaasLaunchPad")
+console.log("Welcome to Web Pro Tools")
 
 // Handle the ON/OFF switch
 const checkbox = document.getElementById("enabled") as HTMLInputElement
