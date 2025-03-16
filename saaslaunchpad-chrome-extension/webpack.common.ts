@@ -1,8 +1,8 @@
 import path from 'path'
-import webpack from 'webpack'
+import {Configuration} from 'webpack'
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-const config: webpack.Configuration = {
+const config: Configuration = {
     entry: {
         background: './src/background.js',
         content: './src/content.js',
