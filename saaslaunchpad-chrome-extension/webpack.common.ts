@@ -1,7 +1,9 @@
-const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+import path from 'path'
+import webpack from 'webpack'
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-module.exports = {
+
+const config: webpack.Configuration = {
     entry: {
         background: './src/background.js',
         content: './src/content.js',
@@ -21,3 +23,5 @@ module.exports = {
         }),
     ]
 }
+
+export default config
