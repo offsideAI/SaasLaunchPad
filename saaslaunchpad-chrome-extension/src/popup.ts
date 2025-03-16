@@ -1,14 +1,10 @@
-"use strict";
+import { setBadgeText } from "./common"
 
 console.log("Welcome to SaasLaunchPad")
 
-function setBadgeText(enabled) {
-  const text = enabled ? "ON" : "OFF"
-  void chrome.action.setBadgeText({text: text})
-}
-
 // Handle the ON/OFF switch
-const checkbox = document.getElementById("enabled")
+const checkbox = document.getElementById("enabled") as HTMLInputElement
+
 
 chrome.storage.sync.get("enabled", (data) => {
   checkbox.checked = !!data.enabled
@@ -24,7 +20,7 @@ checkbox.addEventListener("change", (event) => {
 })
 
 // Handle the input field
-const inputItem = document.getElementById("item")
+const inputItem = document.getElementById("item") as HTMLInputElement
 
 chrome.storage.sync.get("item", (data) => {
   inputItem.value = data.item

@@ -1,12 +1,10 @@
-"use strict"
-
 const blurFilter = "blur(6px)"
 
 let textToBlur = ""
 
 // Search this DOM node for text to blur and blur the parent element if found
 
-function processNode(node) {
+function processNode(node: Node) {
     if (node.childNodes.length > 0) {
         Array.from(node.childNodes).forEach(processNode)
     }
@@ -14,9 +12,10 @@ function processNode(node) {
     if (node.nodeType === Node.TEXT_NODE
         && node.textContent !== null && node.textContent.trim().length > 0) {
         const parent = node.parentElement
-
-        if (parent !== null &&
-            (parent.tagName == 'SCRIPT' || parent.style.filter == blurFilter)) {
+        if (parent == null) {
+            return
+        }
+        if (parent.tagName == 'SCRIPT' || parent.style.filter == blurFilter) {
             // Already blurred
             return
         }
@@ -27,7 +26,7 @@ function processNode(node) {
     }
 }
 
-function blurElement(elem) {
+function blurElement(elem: HTMLElement) {
     elem.style.filter = blurFilter
     console.debug("blurred id:" + elem.id + " class:" + elem.className +
         " tag: " + elem.tagName + " text:" + elem.textContent)
