@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "SaasLaunchPad Chrome Extension",
   "license": "ISC",
-  "author": "",
+  "author": "Arunabh Das",
   "main": "background.js",
   "scripts": {
     "build_bak": "webpack --config webpack.prod.ts",
