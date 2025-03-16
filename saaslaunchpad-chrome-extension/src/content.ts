@@ -69,7 +69,6 @@ chrome.storage.sync.get(keys, (data) => {
     if (data.item) {
         textToBlur = data.item
     }
-    
     observe()
 })
 
