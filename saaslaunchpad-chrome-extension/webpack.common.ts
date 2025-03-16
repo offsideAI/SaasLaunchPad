@@ -8,6 +8,18 @@ const config: webpack.Configuration = {
         content: './src/content.ts',
         popup: './src/popup.ts',
     },
+    resolve: {
+        extensions: [".ts"],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                loader: "ts-loader",
+                exclude: /node_modules/,
+            },
+        ],
+    },
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
