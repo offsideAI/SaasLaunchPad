@@ -4,9 +4,9 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const config: webpack.Configuration = {
     entry: {
-        background: './src/background.ts',
-        content: './src/content.ts',
-        popup: './src/popup.ts',
+        background: './src/background.js',
+        content: './src/content.js',
+        popup: './src/popup.js',
     },
     output: {
         filename: '[name].js',
