@@ -2,8 +2,9 @@ const blurFilter = "blur(6px)"
 
 let textToBlur = ""
 
-// Search this DOM node for text to blur and blur the parent element if found
 
+
+// Search this DOM node for text to blur and blur the parent element if found
 function processNode(node: Node) {
     if (node.childNodes.length > 0) {
         Array.from(node.childNodes).forEach(processNode)
@@ -47,17 +48,11 @@ const observer = new MutationObserver( (mutations) => {
 let enabled = true
 const keys = ["enabled", "item"]
 
-chrome.storage.sync.get(keys, (data) => {
-    if (data.enabled === false) {
-        enabled = false
-    }
-    if (data.item) {
-        textToBlur = data.item
-    }
+function observe() {
     // Only start observing the DOM if the extension is enabled and there is text to blur
     if (enabled && textToBlur.trim().length > 0) {
         observer.observe(document, {
-            attributes: true,
+            attributes: false,
             characterData: true,
             childList: true,
             subtree: true,
@@ -65,4 +60,30 @@ chrome.storage.sync.get(keys, (data) => {
         // Loop through all elements on the page for initial processing
         processNode(document)
     }
+}
+
+chrome.storage.sync.get(keys, (data) => {
+    if (data.enabled === false) {
+        enabled = false
+    }
+    if (data.item) {
+        textToBlur = data.item
+    }
+    
+    observe()
+})
+
+// Listen for messages from popup
+chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
+    if (request.enabled !== undefined) {
+        console.log("Received message from sender %s", sender.id, request)
+        enabled = request.enabled
+        if (enabled) {
+            observe()
+        } else {
+            observer.disconnect()
+        }
+        sendResponse({title: document.title, url: window.location.href})
+    }
+
 })
