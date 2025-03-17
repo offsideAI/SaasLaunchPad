@@ -68,6 +68,17 @@ chrome.storage.sync.get(keys, (data) => {
         textToBlur = data.item
     }
     observe()
+    // TODO-FIXME-KEYFRAME
+    // Content sending message back to popup
+    // CONTENT SENDING MESSAGE BACK TO POPUP
+    chrome.runtime.sendMessage({message: "Content.ts is done with observe and sending message to popup.ts and background.ts"}) 
+    .then((response)=> {
+      console.info("Content received response", response)
+    })
+    .catch((error) => {
+      console.warn("Content could not send")
+    })
+
 })
 
 // Listen for messages from popup
