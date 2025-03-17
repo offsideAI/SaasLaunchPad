@@ -26,12 +26,37 @@ checkbox.addEventListener("change", async (event) => {
         .then((response) => {
                 console.info("Popup received response from tab with title '%s' and url %s",
                     response.title, response.url)
+
         })
         .catch((error) => {
                 console.warn("Popup could not send message to tab %d", tab.id, error)
             })
     }
   }
+})
+
+// Handle the Retrieve button
+const retrieveButton = document.getElementById("doRetrieveData") as HTMLButtonElement
+retrieveButton.addEventListener("click", async (event) => {
+      // Send message to content script 
+    // Send message to content script in all tabs
+    const tabs = await chrome.tabs.query({})
+    for (const tab of tabs) {
+      // Note: sensitive tab properties such as tab.title or tab.url can only be accessed for
+      // URLs in the host_permissions section of manifest.json
+        chrome.tabs.sendMessage(tab.id!, {enabled: true})
+        .then((response) => {
+                console.info("Retrieve button received response from tab with title '%s' and url %s",
+                    response.title, response.url)
+                const inputRetrievedData = document.getElementById("inputRetrievedData") as HTMLInputElement
+                if (inputRetrievedData) {
+                  inputRetrievedData.value = response.title
+                }
+        })
+        .catch((error) => {
+                console.warn("Popup could not send message to tab %d", tab.id, error)
+            })
+    }
 })
 
 
@@ -47,6 +72,9 @@ inputItem.addEventListener("change", (event) => {
       void chrome.storage.sync.set({"item": event.target.value})
   }
 })
+
+// Handle the Retrieve button
+
 
 
 // Handle the Blur Now button
