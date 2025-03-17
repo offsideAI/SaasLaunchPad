@@ -42,6 +42,7 @@ checkbox.addEventListener("change", async (event) => {
                 console.warn("Popup could not send message to tab %d", tab.id, error)
             })
     }
+    
   }
 })
 
@@ -127,5 +128,14 @@ doRuntimeMessageButton.addEventListener("click", async (event)=> {
       showStatus("Please enable the extension first...", true);
       return
     }
+
+    chrome.runtime.sendMessage({action: "runtimeMessageNow"}) 
+      .then((response)=> {
+        console.info("Popup received runtimeMessageNow response", response)
+      })
+      .catch((error) => {
+        console.warn("Popup could not send runtimeMessageNow")
+      })
+
 })
 
