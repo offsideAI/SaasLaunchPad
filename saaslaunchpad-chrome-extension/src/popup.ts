@@ -77,58 +77,20 @@ inputItem.addEventListener("change", (event) => {
   }
 })
 
-// Handle the Retrieve button
-
-
-
 // Handle the Blur Now button
 const doBlurNowButton = document.getElementById("doBlurNow") as HTMLButtonElement
-
-
-
-doBlurNowButton.addEventListener("click", async () => {
+doBlurNowButton.addEventListener("click", async (event) => {
   // Get the current text to blur from the input field
   const textToBlur = inputItem.value.trim()
-  
-  if (!textToBlur) {
-    // Show error message if no text is entered
-    const statusElement = document.getElementById("status") as HTMLDivElement
-    statusElement.textContent = "Please enter text to blur"
-    statusElement.className = "status error"
-    setTimeout(() => {
-      statusElement.textContent = ""
-      statusElement.className = "status"
-    }, 3000)
-    return
-  }
-  
-  // Send message to the active tab to blur elements immediately
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
   if (tabs[0]?.id) {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "blurNow", textToBlur })
-      .then((response) => {
-        const statusElement = document.getElementById("status") as HTMLDivElement
-        if (response && response.success) {
-          statusElement.textContent = `Blurred ${response.count} elements containing "${textToBlur}"`
-          statusElement.className = "status"
-        } else {
-          statusElement.textContent = "No elements found to blur"
-          statusElement.className = "status error"
-        }
-        setTimeout(() => {
-          statusElement.textContent = ""
-          statusElement.className = "status"
-        }, 3000)
-      })
-      .catch((error) => {
-        console.warn("Could not send blur message to tab", error)
-        const statusElement = document.getElementById("status") as HTMLDivElement
-        statusElement.textContent = "Failed to blur elements"
-        statusElement.className = "status error"
-        setTimeout(() => {
-          statusElement.textContent = ""
-          statusElement.className = "status"
-        }, 3000)
-      })
+    chrome.tabs.sendMessage(tabs[0].id, { action: "blurNow", textToBlur})
+    .then((response) => {
+       console.info("Blur Now button was pressed") 
+    })
+    .catch((error) => {
+      console.warn("Blur Now button error %d", error)
+    })
   }
 })
+

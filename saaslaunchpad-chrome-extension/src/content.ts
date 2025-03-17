@@ -2,8 +2,6 @@ const blurFilter = "blur(6px)"
 
 let textToBlur = ""
 
-
-
 // Search this DOM node for text to blur and blur the parent element if found
 function processNode(node: Node) {
     if (node.childNodes.length > 0) {
@@ -87,7 +85,7 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
 
     // Handle blurNow action from popup
     if (request.action === "blurNow") {
-        console.log("Received blurNow request with text:", request.textToBlur)
+        console.log("--Received blurNow request with text:", request.textToBlur)
         
         // Store the original text to blur
         const originalText = textToBlur
