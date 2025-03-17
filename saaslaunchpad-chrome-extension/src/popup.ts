@@ -129,7 +129,7 @@ doRuntimeMessageButton.addEventListener("click", async (event)=> {
       return
     }
 
-    chrome.runtime.sendMessage({action: "runtimeMessageNow"}) 
+    chrome.runtime.sendMessage({enabled: true, action: "runtimeMessageNow"}) 
       .then((response)=> {
         console.info("Popup received runtimeMessageNow response", response)
       })
