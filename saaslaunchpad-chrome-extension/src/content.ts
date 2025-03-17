@@ -85,4 +85,66 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         sendResponse({title: document.title, url: window.location.href})
     }
 
+    // Handle blurNow action from popup
+    if (request.action === "blurNow") {
+        console.log("Received blurNow request with text:", request.textToBlur)
+        
+        // Store the original text to blur
+        const originalText = textToBlur
+        
+        // Temporarily set the text to blur to the requested text
+        textToBlur = request.textToBlur
+        
+        // Disconnect observer temporarily to avoid double processing
+        observer.disconnect()
+        
+        // Track how many elements were blurred
+        let blurredCount = 0
+        
+        // Create a wrapper function for processNode that counts blurred elements
+        function processNodeAndCount(node: Node) {
+            if (node.childNodes.length > 0) {
+                Array.from(node.childNodes).forEach(processNodeAndCount)
+            }
+
+            if (node.nodeType === Node.TEXT_NODE
+                && node.textContent !== null && node.textContent.trim().length > 0) {
+                const parent = node.parentElement
+                if (parent == null) {
+                    return
+                }
+                if (parent.tagName == 'SCRIPT' || parent.style.filter == blurFilter) {
+                    // Already blurred
+                    return
+                }
+
+                if (node.textContent.includes(textToBlur)) {
+                    blurElement(parent)
+                    blurredCount++
+                }
+            }
+        }
+        
+        // Process the entire document with the counting function
+        processNodeAndCount(document)
+        
+        // Restore the original text to blur
+        textToBlur = originalText
+        
+        // Reconnect observer if extension is enabled
+        if (enabled && textToBlur.trim().length > 0) {
+            observe()
+        }
+        
+        // Send response with the number of elements blurred
+        sendResponse({
+            success: true,
+            count: blurredCount
+        })
+        
+        return true // Keep the message channel open for the async response
+    }
+
+    return true // Keep the message channel open for the async response
+
 })
