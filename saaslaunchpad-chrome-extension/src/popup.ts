@@ -80,6 +80,18 @@ inputItem.addEventListener("change", (event) => {
 // Handle the Blur Now button
 const doBlurNowButton = document.getElementById("doBlurNow") as HTMLButtonElement
 doBlurNowButton.addEventListener("click", async (event) => {
+  // Check if the extension is enabled
+  if (!checkbox.checked) {
+    // Show error message if extension is disabled
+    const statusElement = document.getElementById("status") as HTMLDivElement
+    statusElement.textContent = "Please enable the extension first"
+    statusElement.className = "status error"
+    setTimeout(() => {
+      statusElement.textContent = ""
+      statusElement.className = "status"
+    }, 3000)
+    return
+  }
   // Get the current text to blur from the input field
   const textToBlur = inputItem.value.trim()
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
