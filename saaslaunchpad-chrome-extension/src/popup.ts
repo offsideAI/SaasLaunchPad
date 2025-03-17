@@ -11,6 +11,16 @@ chrome.storage.sync.get("enabled", (data) => {
   void setBadgeText(data.enabled)
 })
 
+// Utility function to show status messages
+function showStatus(message: string, isError: boolean = false) {
+  const statusElement = document.getElementById("status") as HTMLDivElement
+  statusElement.textContent = message
+  statusElement.className = isError ? "status error" : "status"
+  setTimeout(() => {
+    statusElement.textContent = ""
+    statusElement.className = "status"
+  }, 3000)
+}
 
 checkbox.addEventListener("change", async (event) => {
   if (event.target instanceof HTMLInputElement) {
@@ -41,13 +51,7 @@ retrieveButton.addEventListener("click", async (event) => {
     // Check if the extension is enabled
     if (!checkbox.checked) {
       // Show error message if extension is disabled
-      const statusElement = document.getElementById("status") as HTMLDivElement
-      statusElement.textContent = "Please enable the extension first"
-      statusElement.className = "status error"
-      setTimeout(() => {
-        statusElement.textContent = ""
-        statusElement.className = "status"
-      }, 3000)
+      showStatus("Please enable the extension first...", true);
       return
     }
     // Send message to content script 
@@ -95,13 +99,7 @@ doBlurNowButton.addEventListener("click", async (event) => {
   // Check if the extension is enabled
   if (!checkbox.checked) {
     // Show error message if extension is disabled
-    const statusElement = document.getElementById("status") as HTMLDivElement
-    statusElement.textContent = "Please enable the extension first"
-    statusElement.className = "status error"
-    setTimeout(() => {
-      statusElement.textContent = ""
-      statusElement.className = "status"
-    }, 3000)
+    showStatus("Please enable the extension first.", true);
     return
   }
   // Get the current text to blur from the input field
@@ -116,5 +114,18 @@ doBlurNowButton.addEventListener("click", async (event) => {
       console.warn("Blur Now button error %d", error)
     })
   }
+})
+
+
+// Handle the Runtime Message button
+const doRuntimeMessageButton = document.getElementById("doRuntimeMessageNow") as HTMLButtonElement
+doRuntimeMessageButton.addEventListener("click", async (event)=> {
+   // Check if the extension is enabled
+    // Check if the extension is enabled
+    if (!checkbox.checked) {
+      // Show error message if extension is disabled
+      showStatus("Please enable the extension first...", true);
+      return
+    }
 })
 
