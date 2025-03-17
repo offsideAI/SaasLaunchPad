@@ -139,3 +139,31 @@ doRuntimeMessageButton.addEventListener("click", async (event)=> {
 
 })
 
+// Handle the Remove Ads button
+const doRemoveAdsButton = document.getElementById("doRemoveAdsNow") as HTMLButtonElement
+doRemoveAdsButton.addEventListener("click", async (event) => {
+      // Check if the extension is enabled
+      if (!checkbox.checked) {
+        // Show error message if extension is disabled
+        showStatus("Please enable the extension first...", true);
+        return
+      }
+      // Get the active tab
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
+      if (tabs[0]?.id) {
+        // Send message to remove ads in the active tab
+        chrome.tabs.sendMessage(tabs[0].id, { action: "removeAds" })
+          .then((response) => {
+            console.info("Ad removal response:", response)
+            if (response && response.success) {
+              showStatus(`Removed ${response.count} advertisements from the page`);
+            } else {
+              showStatus("No advertisements found to remove");
+            }
+          })
+          .catch((error) => {
+            console.warn("Could not remove ads:", error)
+            showStatus("Failed to remove advertisements", true);
+          })
+      }
+})

@@ -118,6 +118,89 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         return true // Keep the message channel open for the async response
     }
 
+    // Handle removeAds action from popup
+    if (request.action === "removeAds") {
+        console.log("Received removeAds request")
+
+        // Try multiple selectors that might match ads
+        const adSelectors = [
+            'div[data-testid="StandardAd"]',
+            'div[class*="ad-"]',
+            'div[class*="advertisement"]',
+            'div[id*="ad-"]',
+            'div[id*="advertisement"]',
+            'iframe[src*="ad"]',
+            'div[aria-label*="advertisement"]'
+        ]
+        
+        let removedCount = 0
+        
+        // Try each selector
+        adSelectors.forEach(selector => {
+            const adDivs = document.querySelectorAll(selector)
+            console.log(`Found ${adDivs.length} elements matching selector: ${selector}`)
+            
+            // Remove each ad div from the DOM
+            adDivs.forEach(adDiv => {
+                // Remove the element from its parent
+                if (adDiv.parentNode) {
+                    adDiv.parentNode.removeChild(adDiv)
+                    removedCount++
+                }
+            })
+        })
+
+        console.log(`Removed ${removedCount} ad divs from the page`)
+    
+        // Set up a MutationObserver to catch dynamically added ads
+        const adObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length > 0) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            // Check if the added node is an ad
+                            const element = node as HTMLElement
+                            adSelectors.forEach(selector => {
+                                if (element.matches && element.matches(selector)) {
+                                    console.log('Removing dynamically added ad:', element)
+                                    element.remove()
+                                }
+                                
+                                // Also check children of the added node
+                                const childAds = element.querySelectorAll(selector)
+                                childAds.forEach(ad => {
+                                    console.log('Removing dynamically added ad child:', ad)
+                                    ad.remove()
+                                })
+                            })
+                        }
+                    })
+                }
+            })
+        })
+        
+        // Start observing the document for dynamically added ads
+        adObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        })
+        
+        // Store the observer so we can disconnect it later if needed
+        const existingObserver = (window as any)._adObserver
+        if (existingObserver) {
+            existingObserver.disconnect()
+        }
+        (window as any)._adObserver = adObserver
+        
+        // Send response with the number of ads removed
+        sendResponse({
+            success: true,
+            count: removedCount
+        })
+        
+        return true // Keep the message channel open for the async response
+    }
+
     return true // Keep the message channel open for the async response
 
 })
