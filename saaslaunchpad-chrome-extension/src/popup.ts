@@ -38,7 +38,19 @@ checkbox.addEventListener("change", async (event) => {
 // Handle the Retrieve button
 const retrieveButton = document.getElementById("doRetrieveData") as HTMLButtonElement
 retrieveButton.addEventListener("click", async (event) => {
-      // Send message to content script 
+    // Check if the extension is enabled
+    if (!checkbox.checked) {
+      // Show error message if extension is disabled
+      const statusElement = document.getElementById("status") as HTMLDivElement
+      statusElement.textContent = "Please enable the extension first"
+      statusElement.className = "status error"
+      setTimeout(() => {
+        statusElement.textContent = ""
+        statusElement.className = "status"
+      }, 3000)
+      return
+    }
+    // Send message to content script 
     // Send message to content script in all tabs
     const tabs = await chrome.tabs.query({})
     for (const tab of tabs) {
