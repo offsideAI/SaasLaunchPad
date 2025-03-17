@@ -100,32 +100,7 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         
         // Track how many elements were blurred
         let blurredCount = 0
-        
-        // Create a wrapper function for processNode that counts blurred elements
-        /*
-        function processNodeAndCount(node: Node) {
-            if (node.childNodes.length > 0) {
-                Array.from(node.childNodes).forEach(processNodeAndCount)
-            }
 
-            if (node.nodeType === Node.TEXT_NODE
-                && node.textContent !== null && node.textContent.trim().length > 0) {
-                const parent = node.parentElement
-                if (parent == null) {
-                    return
-                }
-                if (parent.tagName == 'SCRIPT' || parent.style.filter == blurFilter) {
-                    return
-                }
-
-                if (node.textContent.includes(textToBlur)) {
-                    blurElement(parent)
-                    blurredCount++
-                }
-            }
-        }
-        processNodeAndCount(document)
-        */
         processNode(document)
         
         // Restore the original text to blur

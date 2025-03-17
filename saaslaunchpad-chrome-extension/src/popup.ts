@@ -52,6 +52,8 @@ inputItem.addEventListener("change", (event) => {
 // Handle the Blur Now button
 const doBlurNowButton = document.getElementById("doBlurNow") as HTMLButtonElement
 
+
+
 doBlurNowButton.addEventListener("click", async () => {
   // Get the current text to blur from the input field
   const textToBlur = inputItem.value.trim()
