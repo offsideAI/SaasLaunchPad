@@ -48,9 +48,13 @@ retrieveButton.addEventListener("click", async (event) => {
         .then((response) => {
                 console.info("Retrieve button received response from tab with title '%s' and url %s",
                     response.title, response.url)
-                const inputRetrievedData = document.getElementById("inputRetrievedData") as HTMLInputElement
-                if (inputRetrievedData) {
-                  inputRetrievedData.value = response.title
+                const inputRetrievedTitle = document.getElementById("inputRetrievedTitle") as HTMLInputElement
+                if (inputRetrievedTitle) {
+                  inputRetrievedTitle.value = response.title
+                }
+                const inputRetrievedUrl = document.getElementById("inputRetrievedUrl") as HTMLInputElement
+                if (inputRetrievedUrl) {
+                  inputRetrievedUrl.value = response.url
                 }
         })
         .catch((error) => {
