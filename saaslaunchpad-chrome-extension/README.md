@@ -3,26 +3,26 @@
 # Prerequisites
 
 ```
-╰─❯ node -v  
+╰─❯ node -v
 v23.8.0
 
 ╭─ ~/repos/offsideAI/githubrepos/SaasLaunchPad main \*1 ··············································································································································· 1293 23:49:36
-╰─❯ npm -v  
+╰─❯ npm -v
 11.2.0
 ```
 
-*  Create package.json
+- Create package.json
 
-* Run commands to install webpack
+- Run commands to install webpack
 
 ```
 npm install --save-dev webpack webpack-cli webpack-merge copy-webpack-plugin
 ```
 
-* Check webpack version 
+- Check webpack version
 
 ```
-╰─❯ ./node_modules/.bin/webpack --version     
+╰─❯ ./node_modules/.bin/webpack --version
 
   System:
     OS: macOS 15.2
@@ -38,13 +38,13 @@ npm install --save-dev webpack webpack-cli webpack-merge copy-webpack-plugin
     Edge: 134.0.3124.68
     Safari: 18.2
   Packages:
-    copy-webpack-plugin: ^13.0.0 => 13.0.0 
-    webpack: ^5.98.0 => 5.98.0 
-    webpack-cli: ^6.0.1 => 6.0.1 
-    webpack-merge: ^6.0.1 => 6.0.1 
+    copy-webpack-plugin: ^13.0.0 => 13.0.0
+    webpack: ^5.98.0 => 5.98.0
+    webpack-cli: ^6.0.1 => 6.0.1
+    webpack-merge: ^6.0.1 => 6.0.1
 ```
 
-* Run webpack 
+- Run webpack
 
 ```
 ./node_modules/.bin/webpack --watch --config webpack.dev.js
@@ -77,13 +77,13 @@ webpack 5.98.0 compiled successfully in 59 ms
 
 ```
 
-* Install TypeScript
+- Install TypeScript
 
 ```
 npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types/chrome
 ```
 
-* Add tsconfig.json for TypeScript configuration 
+- Add tsconfig.json for TypeScript configuration
 
 ```
 {
@@ -104,7 +104,7 @@ npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types
 }
 ```
 
-* Install eslint
+- Install eslint
 
 ```
 npm install --save-dev eslint @eslint/js @types/eslint__js typescript-eslint

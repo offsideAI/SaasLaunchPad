@@ -1,28 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <title>Web Pro Tools</title>
-  <link rel="stylesheet" type="text/css" href="popup.css">
-</head>
-<body>
-  <h2>Web Pro Tools</h2>
-  <label class="switch">
-    <input id="enabled" type="checkbox">
-    <span class="slider round"></span>
-  </label>
+  <head>
+    <title>Web Pro Tools</title>
+    <link rel="stylesheet" type="text/css" href="popup.css" />
+  </head>
+  <body>
+    <h2>Web Pro Tools</h2>
+    <label class="switch">
+      <input id="enabled" type="checkbox" />
+      <span class="slider round"></span>
+    </label>
 
-  <input class="secret" id="item" type="text">
-  <input class="secret" id="inputRetrievedTitle" type="text">
-  <input class="secret" id="inputRetrievedUrl" type="text">
+    <input class="secret" id="item" type="text" />
+    <input class="secret" id="inputRetrievedTitle" type="text" />
+    <input class="secret" id="inputRetrievedUrl" type="text" />
 
-  <button id="scrapeHTML">Save</button>
-  <button id="doRetrieveData">Retrieve</button>
-  <button id="doBlurNow">Blur</button>
-  <button id="doRuntimeMessageNow">Runtime Message</button>
-  <button id="doRemoveAdsNow">Remove Ads</button>
+    <button id="scrapeHTML">Save</button>
+    <button id="doRetrieveData">Retrieve</button>
+    <button id="doBlurNow">Blur</button>
+    <button id="doRuntimeMessageNow">Runtime Message</button>
+    <button id="doRemoveAdsNow">Remove Ads</button>
 
-  <div class="status" id="status"></div>
+    <div class="status" id="status"></div>
 
-  <script src="popup.js"></script>
-</body>
+    <script src="popup.js"></script>
+  </body>
 </html>

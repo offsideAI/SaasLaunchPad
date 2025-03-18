@@ -1,103 +1,103 @@
 /* Default */
 
 body {
-    width: 300px;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    background-color: #222; /* Dark background */
-    color: #eee; /* Light text */
+  width: 300px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  background-color: #222; /* Dark background */
+  color: #eee; /* Light text */
 }
 button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 button:hover {
-    background-color: #3367d6;
+  background-color: #3367d6;
 }
 .status {
-    margin-top: 10px;
-    color: #4285f4;
-    font-style: italic;
+  margin-top: 10px;
+  color: #4285f4;
+  font-style: italic;
 }
 
 /* Switch - box around the slider */
 .switch {
-    margin-left: 0%;
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
+  margin-left: 0%;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
 /* Hide default HTML checkbox */
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 /* The slider */
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    background-color: #555; /* Darker gray for slider background */
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  background-color: #555; /* Darker gray for slider background */
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .secret {
-    background-color: #333;
-    color: #eee;
-    border: 1px solid #555;
-    padding: 8px;
-    border-radius: 5px; /* Rounded corners like the slider */
-    height: 28px; /* More consistent with the slider height */
-    width: 100%; /* Better width proportion */
-    outline: none; /* Remove focus outline */
-    display: block; /* Make it full width */
-    box-sizing: border-box;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-right: 10px;
-    transition: border-color 0.3s; /* Smooth transition on focus */
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 8px;
+  border-radius: 5px; /* Rounded corners like the slider */
+  height: 28px; /* More consistent with the slider height */
+  width: 100%; /* Better width proportion */
+  outline: none; /* Remove focus outline */
+  display: block; /* Make it full width */
+  box-sizing: border-box;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  transition: border-color 0.3s; /* Smooth transition on focus */
 }
 
 .secret:focus {
-    border-color: #2196F3; /* Match the active slider color when focused */
+  border-color: #2196f3; /* Match the active slider color when focused */
 }
