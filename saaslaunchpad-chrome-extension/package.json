@@ -9,7 +9,10 @@
     "build_bak": "webpack --config webpack.prod.ts",
     "start_bak": "webpack --watch --config webpack.dev.ts",
     "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "start": "webpack --watch --config webpack.config.js"
+    "start": "webpack --watch --config webpack.config.js",
+    "format": "prettier --write .",
+    "format-check": "prettier --check .",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
