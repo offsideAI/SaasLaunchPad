@@ -1,4 +1,4 @@
-import { setBadgeText } from "./common"
+import { Message, setBadgeText } from "./common"
 
 function startUp() {
   chrome.storage.sync.get("enabled", (data) => {
@@ -11,7 +11,8 @@ chrome.runtime.onStartup.addListener(startUp)
 chrome.runtime.onInstalled.addListener(startUp)
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.enabled !== undefined) {
+  const message: Message = request as Message
+  if (message.enabled !== undefined) {
     console.log(
       "Service worker received message from sender %s",
       sender.id,
