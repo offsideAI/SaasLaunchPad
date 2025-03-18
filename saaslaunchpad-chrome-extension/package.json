@@ -12,12 +12,16 @@
     "start": "webpack --watch --config webpack.config.js"
   },
   "devDependencies": {
+    "@eslint/js": "^9.22.0",
     "@tsconfig/recommended": "^1.0.8",
     "@types/chrome": "^0.0.309",
+    "@types/eslint__js": "^8.42.3",
     "copy-webpack-plugin": "^13.0.0",
+    "eslint": "^9.22.0",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.1",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1",
     "webpack-merge": "^6.0.1"

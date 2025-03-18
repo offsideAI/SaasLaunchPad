@@ -103,3 +103,9 @@ npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types
   "exclude": ["node_modules"]
 }
 ```
+
+* Install eslint
+
+```
+npm install --save-dev eslint @eslint/js @types/eslint__js typescript-eslint
+```
