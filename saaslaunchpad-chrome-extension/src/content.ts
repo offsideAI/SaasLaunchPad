@@ -1,3 +1,5 @@
+import { StoredConfig } from "./common"
+
 const blurFilter = "blur(6px)"
 
 let textToBlur = ""
@@ -72,11 +74,13 @@ function observe() {
 }
 
 chrome.storage.sync.get(keys, (data) => {
-  if (data.enabled === false) {
+  const config: StoredConfig = data as StoredConfig
+
+  if (config.enabled === false) {
     enabled = false
   }
-  if (data.item) {
-    textToBlur = data.item
+  if (config.item) {
+    textToBlur = config.item
   }
   observe()
   // TODO-FIXME-KEYFRAME
