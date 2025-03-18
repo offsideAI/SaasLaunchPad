@@ -6,11 +6,11 @@ on:
       - main
     paths: # We only run the workflow if the code in these files/directories changes
       - '.github/workflows/lint-and-format.yml' # This file
-      - '4-linting-and-formatting/**' # The working directory for this article
+      - 'saaslaunchpad-chrome-extension/**' # The working directory for this article
   pull_request:
     paths:
       - '.github/workflows/lint-and-format.yml'
-      - '4-linting-and-formatting/**'
+      - 'saaslaunchpad-chrome-extension/**'
 
 # This allows a subsequently queued workflow run to interrupt previous runs
 concurrency:
@@ -20,8 +20,7 @@ concurrency:
 defaults:
   run:
     shell: bash
-    working-directory: ./4-linting-and-formatting
-
+    working-directory: ./saaslaunchpad-chrome-extension
 
 permissions:
   contents: read
