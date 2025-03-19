@@ -1,5 +1,4 @@
 import { Message, setBadgeText, StoredConfig, TabResponse } from "./common"
-import TabRemovedEvent = chrome.tabs.TabRemovedEvent
 
 console.log("Welcome to Web Pro Tools")
 
@@ -51,7 +50,7 @@ checkbox.addEventListener("change", (event) => {
         }
       })
       .catch( (error) => {
-
+        console.warn("Popup could not query tabs", error)
       })
 
   }
