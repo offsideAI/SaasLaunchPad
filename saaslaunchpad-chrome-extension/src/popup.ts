@@ -1,4 +1,5 @@
-import { Message, setBadgeText, StoredConfig } from "./common"
+import { Message, setBadgeText, StoredConfig, TabResponse } from "./common"
+import TabRemovedEvent = chrome.tabs.TabRemovedEvent
 
 console.log("Welcome to Web Pro Tools")
 
@@ -37,10 +38,11 @@ checkbox.addEventListener("change", (event) => {
           chrome.tabs
             .sendMessage(tab.id!, { enabled: message })
             .then((response) => {
+              const tabResponse: TabResponse = response as TabResponse
               console.info(
                 "Popup received response from tab with title '%s' and url %s",
-                response.title,
-                response.url,
+                tabResponse.title,
+                tabResponse.url,
               )
             })
             .catch((error) => {
