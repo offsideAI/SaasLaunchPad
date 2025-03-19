@@ -95,7 +95,7 @@ chrome.storage.sync.get(keys, (data) => {
       console.info("Content received response", response)
     })
     .catch((error) => {
-      console.warn("Content could not send")
+      console.warn("Content could not send", error)
     })
 })
 
