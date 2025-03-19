@@ -1,4 +1,4 @@
-import { StoredConfig } from "./common"
+import { StoredConfig, TabResponse } from "./common"
 
 const blurFilter = "blur(6px)"
 
@@ -109,7 +109,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else {
       observer.disconnect()
     }
-    sendResponse({ title: document.title, url: window.location.href })
+    const response: TabResponse = { title: document.title, url: window.location.href }
+    sendResponse(response)
   }
 
   // Handle blurNow action from popup

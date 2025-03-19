@@ -1,4 +1,4 @@
-import { setBadgeText, StoredConfig } from "./common"
+import { Message, setBadgeText, StoredConfig } from "./common"
 
 console.log("Welcome to Web Pro Tools")
 
@@ -22,29 +22,36 @@ function showStatus(message: string, isError: boolean = false) {
   }, 3000)
 }
 
-checkbox.addEventListener("change", async (event) => {
+checkbox.addEventListener("change", (event) => {
   if (event.target instanceof HTMLInputElement) {
     void chrome.storage.sync.set({ enabled: event.target.checked })
     void setBadgeText(event.target.checked)
     // Send message to content script
     // Send message to content script in all tabs
-    const tabs = await chrome.tabs.query({})
-    for (const tab of tabs) {
-      // Note: sensitive tab properties such as tab.title or tab.url can only be accessed for
-      // URLs in the host_permissions section of manifest.json
-      chrome.tabs
-        .sendMessage(tab.id!, { enabled: event.target.checked })
-        .then((response) => {
-          console.info(
-            "Popup received response from tab with title '%s' and url %s",
-            response.title,
-            response.url,
-          )
-        })
-        .catch((error) => {
-          console.warn("Popup could not send message to tab %d", tab.id, error)
-        })
-    }
+    const message: Message = { enabled: event.target.checked }
+      chrome.tabs.query({})
+      .then((tabs) => {
+        for (const tab of tabs) {
+          // Note: sensitive tab properties such as tab.title or tab.url can only be accessed for
+          // URLs in the host_permissions section of manifest.json
+          chrome.tabs
+            .sendMessage(tab.id!, { enabled: message })
+            .then((response) => {
+              console.info(
+                "Popup received response from tab with title '%s' and url %s",
+                response.title,
+                response.url,
+              )
+            })
+            .catch((error) => {
+              console.warn("Popup could not send message to tab %d", tab.id, error)
+            })
+        }
+      })
+      .catch( (error) => {
+
+      })
+
   }
 })
 
