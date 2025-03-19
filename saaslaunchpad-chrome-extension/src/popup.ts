@@ -105,7 +105,8 @@ retrieveButton.addEventListener("click", async (event) => {
 const inputItem = document.getElementById("item") as HTMLInputElement
 
 chrome.storage.sync.get("item", (data) => {
-  inputItem.value = data.item
+  const config: StoredConfig = data as StoredConfig
+  inputItem.value = config.item ?? ""
 })
 
 inputItem.addEventListener("change", (event) => {
