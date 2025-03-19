@@ -1,4 +1,4 @@
-import { setBadgeText } from "./common"
+import { setBadgeText, StoredConfig } from "./common"
 
 console.log("Welcome to Web Pro Tools")
 
@@ -6,8 +6,9 @@ console.log("Welcome to Web Pro Tools")
 const checkbox = document.getElementById("enabled") as HTMLInputElement
 
 chrome.storage.sync.get("enabled", (data) => {
-  checkbox.checked = !!data.enabled
-  void setBadgeText(data.enabled)
+  const config: StoredConfig = data as StoredConfig
+  checkbox.checked = !!config.enabled
+  void setBadgeText(!!config.enabled)
 })
 
 // Utility function to show status messages
