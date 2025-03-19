@@ -11,9 +11,9 @@ v23.8.0
 11.2.0
 ```
 
-- Create package.json
+* Create package.json
 
-- Run commands to install webpack
+*  Run commands to install webpack
 
 ```
 npm install --save-dev webpack webpack-cli webpack-merge copy-webpack-plugin
@@ -44,7 +44,7 @@ npm install --save-dev webpack webpack-cli webpack-merge copy-webpack-plugin
     webpack-merge: ^6.0.1 => 6.0.1
 ```
 
-- Run webpack
+* Run webpack
 
 ```
 ./node_modules/.bin/webpack --watch --config webpack.dev.js
@@ -58,7 +58,7 @@ OR
 npm run watch
 ```
 
-- webpack runs as below
+* webpack runs as below
 
 ```
 ./node_modules/.bin/webpack --watch --config webpack.dev.js
@@ -77,13 +77,13 @@ webpack 5.98.0 compiled successfully in 59 ms
 
 ```
 
-- Install TypeScript
+* Install TypeScript
 
 ```
 npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types/chrome
 ```
 
-- Add tsconfig.json for TypeScript configuration
+* Add tsconfig.json for TypeScript configuration
 
 ```
 {
@@ -104,8 +104,14 @@ npm install --save-dev typescript @tsconfig/recommended ts-node ts-loader @types
 }
 ```
 
-- Install eslint
+* Install eslint
 
 ```
 npm install --save-dev eslint @eslint/js @types/eslint__js typescript-eslint
+```
+
+* Run lint checker
+
+```
+    npm run lint
 ```
