@@ -8,6 +8,7 @@ chrome.storage.sync.get(null, (data) => {
     ) as HTMLInputElement
     input.value = excludeHost
     input.addEventListener("change", (event) => {
+        console.log("event", event.target)
         if (event.target instanceof HTMLInputElement) {
             const updatedExcludeWebsite = event.target.value
             const updatedConfig: StoredConfig = {excludeHost: updatedExcludeWebsite}
@@ -19,6 +20,7 @@ chrome.storage.sync.get(null, (data) => {
                     const message: Message = {excludeHost: updatedExcludeWebsite}
                     for (const tab of tabs) {
                         if (tab.id !== undefined) {
+                            console.log("tab", tab)
                             chrome.tabs
                                 .sendMessage(tab.id, message)
                                 .catch(() => {

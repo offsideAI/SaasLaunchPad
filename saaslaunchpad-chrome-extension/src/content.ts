@@ -59,7 +59,7 @@ const observer = new MutationObserver((mutations) => {
 })
 
 // Enable the content script by default
-const keys = ["enabled", "item"]
+const keys = ["enabled", "item", "excludeHost"]
 
 function observe() {
   // Only start observing the DOM if the extension is enabled and there is text to blur
