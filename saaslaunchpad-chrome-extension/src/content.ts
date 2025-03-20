@@ -1,4 +1,4 @@
-import { StoredConfig, TabResponse } from "./common"
+import { StoredConfig, TabResponse, Message } from "./common"
 
 const blurFilter = "blur(6px)"
 
@@ -99,11 +99,12 @@ chrome.storage.sync.get(keys, (data) => {
     })
 })
 
-// Listen for messages from popup
+// Listen for messages from popup and service worker
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.enabled !== undefined) {
+  const message: Message = request as Message 
+  if (message.enabled !== undefined) {
     console.log("Received message from sender %s", sender.id, request)
-    enabled = request.enabled
+    enabled = message.enabled
     if (enabled) {
       observe()
     } else {
