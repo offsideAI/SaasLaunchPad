@@ -125,24 +125,24 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else {
       observer.disconnect()
     }
-    if (message.excludeHost !== undefined) {
-      console.log(
-        "Received excludeHost message from sender %s", 
-        sender.id, 
-        request
-      )
-      config.excludeHost = message.excludeHost
-      if (config.excludeHost == window.location.host) {
-        observer.disconnect()
-      }
-    }
-
-    const response: TabResponse = { 
-      title: document.title, 
-      url: window.location.href 
-    }
-    sendResponse(response)
   }
+  if (message.excludeHost !== undefined) {
+    console.log(
+      "Received excludeHost message from sender %s", 
+      sender.id, 
+      request
+    )
+    config.excludeHost = message.excludeHost
+    if (config.excludeHost == window.location.host) {
+      observer.disconnect()
+    }
+  }
+
+  const response: TabResponse = { 
+    title: document.title, 
+    url: window.location.href 
+  }
+  sendResponse(response)
 
   // Handle blurNow action from popup
   if (request.action === "blurNow") {
