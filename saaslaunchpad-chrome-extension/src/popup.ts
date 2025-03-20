@@ -159,7 +159,7 @@ doRuntimeMessageButton.addEventListener("click", async (event) => {
       console.info("Popup received runtimeMessageNow response", response)
     })
     .catch((error) => {
-      console.warn("Popup could not send runtimeMessageNow")
+      console.warn("Popup could not send runtimeMessageNow", error)
     })
 })
 
