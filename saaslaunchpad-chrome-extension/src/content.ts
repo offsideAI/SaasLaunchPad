@@ -27,10 +27,8 @@ function processNode(node: Node) {
       return
     }
 
-    if (config.item) {
-      if (node.textContent.includes(config.item)) {
-        blurElement(parent)
-      }
+    if (node.textContent.includes(config.item ?? "")) {
+      blurElement(parent)
     }
   }
 }
