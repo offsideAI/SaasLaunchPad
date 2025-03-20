@@ -11,3 +11,8 @@
 ```
 Research the latest research papers related to AI and Machine Learning on Arxiv.org and come up with a prediction on when we can expect AGI and ASI and the singularity
 ```
+
+## Links
+
+https://youtu.be/d3fPjM2mmNw?feature=shared
+
