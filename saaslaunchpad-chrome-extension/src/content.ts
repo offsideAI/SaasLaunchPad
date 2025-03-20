@@ -1,8 +1,11 @@
 import { StoredConfig, TabResponse, Message } from "./common"
 
 const blurFilter = "blur(6px)"
-
-let textToBlur = ""
+let config: StoredConfig = {
+  enabled: true,
+  item: "",
+  excludeHost: "",
+}
 
 // Search this DOM node for text to blur and blur the parent element if found
 function processNode(node: Node) {
@@ -24,8 +27,10 @@ function processNode(node: Node) {
       return
     }
 
-    if (node.textContent.includes(textToBlur)) {
-      blurElement(parent)
+    if (config.item) {
+      if (node.textContent.includes(config.item)) {
+        blurElement(parent)
+      }
     }
   }
 }
@@ -56,12 +61,11 @@ const observer = new MutationObserver((mutations) => {
 })
 
 // Enable the content script by default
-let enabled = true
 const keys = ["enabled", "item"]
 
 function observe() {
   // Only start observing the DOM if the extension is enabled and there is text to blur
-  if (enabled && textToBlur.trim().length > 0) {
+  if (config.item && config.item.trim().length > 0) {
     observer.observe(document, {
       attributes: false,
       characterData: true,
@@ -74,15 +78,28 @@ function observe() {
 }
 
 chrome.storage.sync.get(keys, (data) => {
-  const config: StoredConfig = data as StoredConfig
+  config = data as StoredConfig
 
+  // Only start observing the DOM if the extension is enabled and there is text to blue
+  /* TODO-FIXME-CLEANUP
   if (config.enabled === false) {
     enabled = false
   }
   if (config.item) {
     textToBlur = config.item
   }
-  observe()
+  if (enabled) {
+    observe()
+  }
+  */
+  // Only start observing the DOM if the extension is enabled and there is text to blue
+  if (
+    config.enabled &&
+    config.item &&
+    config.excludeHost !== window.location.host
+  ) {
+    observe()
+  }
   // TODO-FIXME-KEYFRAME
   // Content sending message back to popup
   // CONTENT SENDING MESSAGE BACK TO POPUP
@@ -104,13 +121,28 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   const message: Message = request as Message 
   if (message.enabled !== undefined) {
     console.log("Received message from sender %s", sender.id, request)
-    enabled = message.enabled
-    if (enabled) {
+    config.enabled = message.enabled
+    if (config.enabled) {
       observe()
     } else {
       observer.disconnect()
     }
-    const response: TabResponse = { title: document.title, url: window.location.href }
+    if (message.excludeHost !== undefined) {
+      console.log(
+        "Received excludeHost message from sender %s", 
+        sender.id, 
+        request
+      )
+      config.excludeHost = message.excludeHost
+      if (config.excludeHost == window.location.host) {
+        observer.disconnect()
+      }
+    }
+
+    const response: TabResponse = { 
+      title: document.title, 
+      url: window.location.href 
+    }
     sendResponse(response)
   }
 
@@ -119,10 +151,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("--Received blurNow request with text:", request.textToBlur)
 
     // Store the original text to blur
-    const originalText = textToBlur
+    const originalText = config.item
 
     // Temporarily set the text to blur to the requested text
-    textToBlur = request.textToBlur
+    config.item = request.textToBlur
 
     // Disconnect observer temporarily to avoid double processing
     observer.disconnect()
@@ -133,10 +165,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     processNode(document)
 
     // Restore the original text to blur
-    textToBlur = originalText
+    config.item = originalText
 
     // Reconnect observer if extension is enabled
-    if (enabled && textToBlur.trim().length > 0) {
+    if (config.enabled && config.item && config.item.trim().length > 0) {
       observe()
     }
 
