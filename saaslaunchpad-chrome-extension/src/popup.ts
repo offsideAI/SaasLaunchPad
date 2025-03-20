@@ -132,7 +132,7 @@ doBlurNowButton.addEventListener("click", async (event) => {
     chrome.tabs
       .sendMessage(tabs[0].id, { action: "blurNow", textToBlur })
       .then((response) => {
-        console.info("Blur Now button was pressed")
+        console.info("Blur Now button was pressed", response)
       })
       .catch((error) => {
         console.warn("Blur Now button error %d", error)
