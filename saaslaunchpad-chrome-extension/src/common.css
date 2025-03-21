@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .my-input {
-    @apply block m-1.5 p-2 bg-blue-600 border border-blue-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500;
+    @apply block m-1.5 p-2 bg-blue-600 border border-blue-400 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500;
 }
