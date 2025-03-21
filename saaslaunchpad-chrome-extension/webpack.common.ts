@@ -23,7 +23,15 @@ const config: webpack.Configuration = {
         test: /\.css$/,
         use: [
           "style-loader",
-          "css-loader"
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: ["postcss-import", "tailwindcss"],
+              },
+            },
+          },
         ],
       }
     ],
