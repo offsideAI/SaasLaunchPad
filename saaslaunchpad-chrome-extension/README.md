@@ -127,5 +127,5 @@ npm install --save-dev style-loader css-loader
 * Add tailwindcss and postcss-loader
 
 ```
-
+npm install --save-dev tailwindcss postcss-loader
 ```
