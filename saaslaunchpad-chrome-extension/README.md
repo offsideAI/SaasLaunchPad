@@ -117,7 +117,15 @@ npm install --save-dev eslint @eslint/js @types/eslint__js typescript-eslint
 ```
 
 * Add CSS framework
+* Add style-loader and css-loader
 ```
 npm install --save-dev style-loader css-loader
+
+```
+
+** Add tailwindcss
+* Add tailwindcss and postcss-loader
+
+```
 
 ```
