@@ -115,3 +115,9 @@ npm install --save-dev eslint @eslint/js @types/eslint__js typescript-eslint
 ```
     npm run lint
 ```
+
+* Add CSS framework
+```
+npm install --save-dev style-loader css-loader
+
+```
