@@ -1,0 +1,17 @@
+{
+    "mcpServers": {
+      "filesystem": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "/Users/coder/Desktop",
+          "/Users/coder/Downloads"
+        ]
+      },
+      "weather": {
+        "command": "/Users/coder/repos/offsideAI/githubrepos/SaasLaunchPad/saaslaunchpad-mcp-server-weather/weather/run_weather.sh",
+        "args": []
+      }
+    }
+  }
