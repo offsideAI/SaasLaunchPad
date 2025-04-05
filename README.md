@@ -18,3 +18,7 @@ https://youtu.be/d3fPjM2mmNw?feature=shared
 
 
 
+## MCP Links
+
+https://www.youtube.com/watch?v=qb95jXnCOdc
+
