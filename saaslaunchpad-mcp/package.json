@@ -5,12 +5,13 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "mcp-plausible-server": "dist/index.js"
+    "mcp-plausible-server": "dist/main.js"
   },
   "files": [
     "dist"
   ],
   "scripts": {
+    "start": "node dist/main.js",
     "build": "tsc && shx chmod +x dist/*.js",
     "prepare": "npm run build",
     "watch": "tsc --watch"
