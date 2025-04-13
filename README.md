@@ -1,4 +1,4 @@
-# SaasLaunchPad
+# SaasLaunchPad - Fullstack SaaS Platform Starter Kit
 
 ## Fullstack Saas Platform Starter Kit
 ## Demo
