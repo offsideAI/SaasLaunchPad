@@ -11,4 +11,27 @@ fun Application.module() {
     configureSerialization()
     configureDatabases()
     configureRouting()
+    install(DefaultHeaders)
+
+    install(ContentNegotiation) {
+        json(Json {
+            prettyPrint = true
+            isLenient = true
+        })
+    }
+
+    install(StatusPages) {
+        exception<Throwable> { call, cause -> 
+            call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
+        }
+    }
+
+    DbFactory.init(environment)
+    val taskDao = TaskDao()
+
+    install(Routing) {
+        task(taskDao)
+    }
+
+
 }
