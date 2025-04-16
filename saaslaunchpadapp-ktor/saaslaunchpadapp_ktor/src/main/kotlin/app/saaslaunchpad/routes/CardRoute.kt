@@ -1,5 +1,11 @@
 package app.saaslaunchpad.routes
 
+import app.saaslaunchpad.data.model.Card
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.call
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.get
 
 private const val BASE_URL = "http://192.168.86.182:8090"
 
