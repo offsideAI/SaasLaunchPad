@@ -37,6 +37,14 @@ npm install @modelcontextprotocol/sdk zod dotenv
 Research the latest research papers related to AI and Machine Learning on Arxiv.org and come up with a prediction on when we can expect AGI and ASI and the singularity
 ```
 
+## saaslaunchpad-krtor Steps
+
+```
+cd saaslaunchpadapp_ktor
+
+./gradlew run
+
+```
 ## Links
 
 https://youtu.be/d3fPjM2mmNw?feature=shared
