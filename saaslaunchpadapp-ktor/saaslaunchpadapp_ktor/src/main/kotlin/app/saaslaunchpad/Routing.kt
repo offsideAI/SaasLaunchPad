@@ -1,5 +1,6 @@
 package app.saaslaunchpad
 
+import app.saaslaunchpad.routes.randomCard
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -18,6 +19,14 @@ import org.slf4j.event.*
 
 fun Application.configureRouting() {
     routing {
+        // Root path handler for the test
+        get("/") {
+            call.respondText("Welcome to SaasLaunchPad API", contentType = ContentType.Text.Plain)
+        }
+        
+        // Register CardRoute properly by applying the extension function directly to the routing block
+        randomCard()
+        
         // Static plugin. Try to access `/static/index.html`
         staticResources("/static", "static")
     }
