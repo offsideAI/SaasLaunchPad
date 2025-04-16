@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  db:
+    container_name: "saaslaunchpadapp"
+    image: postgres:15.2
+    restart: always
+    environment:
+      - POSTGRES_USER=saaslaunchpadapp_user
+      - POSTGRES_PASSWORD=saaslaunchpadapp_password
+      - POSTGRES_DB=saaslaunchpadapp_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
