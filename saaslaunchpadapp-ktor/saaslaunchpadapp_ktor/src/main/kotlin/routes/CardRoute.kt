@@ -13,6 +13,9 @@ private val cards = listOf(
 
 fun Route.randomCard() {
     get("/randomcard") {
-
+        call.respond(
+            HttpStatusCode.OK,
+            cards.random()
+        )
     }
 }
