@@ -28,6 +28,9 @@ fun Application.configureRouting() {
         randomCard()
         
         // Static plugin. Try to access `/static/index.html`
-        staticResources("/static", "static")
+        // staticResources("/static", "static")
+        static {
+            resources("static")
+        }
     }
 }
