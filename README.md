@@ -1,5 +1,8 @@
 # SaasLaunchPad - Fullstack SaaS Platform Starter Kit
 
+* SaaSLaunchPad is a fullstack SaaS Platform Starter Kit
+
+
 ## Backend
 
 Backend can be found in `saaslaunchpadapp-backend` 
